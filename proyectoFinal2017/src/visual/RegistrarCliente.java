@@ -24,12 +24,12 @@ import javax.swing.JTextField;
 public class RegistrarCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtnombre;
-	private  JFormattedTextField txtcedula;
-	private JTextField txtapellido;
-	private JFormattedTextField txttelefono;
-	private JTextField txtdireccion;
-	private JTextField txtcorreo;
+	private JTextField txtNombre;
+	private  JFormattedTextField txtCedula;
+	private JTextField txtApellido;
+	private JFormattedTextField txtTelefono;
+	private JTextField txtDireccion;
+	private JTextField txtCorreo;
 	private MaskFormatter cedu;
 	private MaskFormatter tele;
 	/**
@@ -66,10 +66,10 @@ public class RegistrarCliente extends JDialog {
 			lblNombre.setBounds(10, 37, 65, 14);
 			panel.add(lblNombre);
 			
-			txtnombre = new JTextField();
-			txtnombre.setBounds(59, 34, 105, 20);
-			panel.add(txtnombre);
-			txtnombre.setColumns(10);
+			txtNombre = new JTextField();
+			txtNombre.setBounds(59, 34, 105, 20);
+			panel.add(txtNombre);
+			txtNombre.setColumns(10);
 			
 			JLabel lblCedula = new JLabel("Cedula:");
 			lblCedula.setBounds(10, 81, 46, 14);
@@ -85,19 +85,19 @@ public class RegistrarCliente extends JDialog {
 			}
 			
 			
-			txtcedula = new  JFormattedTextField(cedu);;
-			txtcedula.setBounds(59, 78, 105, 20);
-			panel.add(txtcedula);
-			txtcedula.setColumns(10);
+			txtCedula = new  JFormattedTextField(cedu);;
+			txtCedula.setBounds(59, 78, 105, 20);
+			panel.add(txtCedula);
+			txtCedula.setColumns(10);
 			
 			JLabel lblApellido = new JLabel("Apellido:");
 			lblApellido.setBounds(174, 37, 65, 14);
 			panel.add(lblApellido);
 			
-			txtapellido = new JTextField();
-			txtapellido.setBounds(230, 34, 100, 20);
-			panel.add(txtapellido);
-			txtapellido.setColumns(10);
+			txtApellido = new JTextField();
+			txtApellido.setBounds(230, 34, 100, 20);
+			panel.add(txtApellido);
+			txtApellido.setColumns(10);
 			
 					
 			
@@ -105,45 +105,45 @@ public class RegistrarCliente extends JDialog {
 			lblTelefono.setBounds(174, 81, 65, 14);
 			panel.add(lblTelefono);
 			
-			txttelefono = new JFormattedTextField(tele);
-			txttelefono.setBounds(230, 78, 100, 20);
-			panel.add(txttelefono);
-			txttelefono.setColumns(10);
+			txtTelefono = new JFormattedTextField(tele);
+			txtTelefono.setBounds(230, 78, 100, 20);
+			panel.add(txtTelefono);
+			txtTelefono.setColumns(10);
 			
 			JLabel lblDireccion = new JLabel("Direccion:");
 			lblDireccion.setBounds(10, 129, 65, 14);
 			panel.add(lblDireccion);
 			
-			txtdireccion = new JTextField();
-			txtdireccion.setBounds(66, 126, 264, 20);
-			panel.add(txtdireccion);
-			txtdireccion.setColumns(10);
+			txtDireccion = new JTextField();
+			txtDireccion.setBounds(66, 126, 264, 20);
+			panel.add(txtDireccion);
+			txtDireccion.setColumns(10);
 			
 			JLabel lblCorreo = new JLabel("Correo:");
 			lblCorreo.setBounds(10, 173, 46, 14);
 			panel.add(lblCorreo);
 			
-			txtcorreo = new JTextField();
-			txtcorreo.setBounds(66, 170, 264, 20);
-			panel.add(txtcorreo);
-			txtcorreo.setColumns(10);
+			txtCorreo = new JTextField();
+			txtCorreo.setBounds(66, 170, 264, 20);
+			panel.add(txtCorreo);
+			txtCorreo.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Guardar");
-				okButton.addActionListener(new ActionListener() {
+				JButton btcGuardar = new JButton("Guardar");
+				btcGuardar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(!txtnombre.getText().equalsIgnoreCase("")  && !txtcorreo.getText().equalsIgnoreCase("") && !txtdireccion.getText().equalsIgnoreCase("")
-								&& txtcedula.getText().length()==13 && txttelefono.getText().length()==14 && !txtapellido.getText().equalsIgnoreCase("") ) {
-						String nombre=txtnombre.getText();
-						String apellido=txtapellido.getText();
-						String correo=txtcorreo.getText();
-						String cedula=txtcedula.getText();
-						String direccion=txtdireccion.getText();
-						String telefono=txttelefono.getText();
+						if(!txtNombre.getText().equalsIgnoreCase("")  && !txtCorreo.getText().equalsIgnoreCase("") && !txtDireccion.getText().equalsIgnoreCase("")
+								&& txtCedula.getText().length()==13 && txtTelefono.getText().length()==14 && !txtApellido.getText().equalsIgnoreCase("") ) {
+						String nombre=txtNombre.getText();
+						String apellido=txtApellido.getText();
+						String correo=txtCorreo.getText();
+						String cedula=txtCedula.getText();
+						String direccion=txtDireccion.getText();
+						String telefono=txtTelefono.getText();
 						
 						Cliente cliente=new Cliente(nombre, apellido, cedula, direccion, telefono, correo);
 						
@@ -153,30 +153,30 @@ public class RegistrarCliente extends JDialog {
 						}else { JOptionPane.showMessageDialog(null, "Datos Imcompletos",null,JOptionPane.WARNING_MESSAGE,null);}
 					}
 				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				btcGuardar.setActionCommand("OK");
+				buttonPane.add(btcGuardar);
+				getRootPane().setDefaultButton(btcGuardar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.addActionListener(new ActionListener() {
+				JButton btnCancelar = new JButton("Cancelar");
+				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
 			}
 		}
 	}
 	
 	private void CleanCliente() {
-		txtnombre.setText("");
-		txtcedula.setText("");
-		txtdireccion.setText("");
-		txttelefono.setText("");
-		txtcorreo.setText("");
-		txtapellido.setText("");
+		txtNombre.setText("");
+		txtCedula.setText("");
+		txtDireccion.setText("");
+		txtTelefono.setText("");
+		txtCorreo.setText("");
+		txtApellido.setText("");
 		
 	}
 	
