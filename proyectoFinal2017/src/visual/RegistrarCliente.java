@@ -63,16 +63,16 @@ public class RegistrarCliente extends JDialog {
 			panel.setLayout(null);
 			
 			JLabel lblNombre = new JLabel("Nombre:");
-			lblNombre.setBounds(10, 37, 65, 14);
+			lblNombre.setBounds(10, 37, 65, 21);
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(59, 34, 105, 20);
+			txtNombre.setBounds(66, 37, 105, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
 			JLabel lblCedula = new JLabel("Cedula:");
-			lblCedula.setBounds(10, 81, 46, 14);
+			lblCedula.setBounds(10, 81, 46, 21);
 			panel.add(lblCedula);
 			
 			try {
@@ -86,45 +86,45 @@ public class RegistrarCliente extends JDialog {
 			
 			
 			txtCedula = new  JFormattedTextField(cedu);;
-			txtCedula.setBounds(59, 78, 105, 20);
+			txtCedula.setBounds(66, 81, 105, 20);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
 			JLabel lblApellido = new JLabel("Apellido:");
-			lblApellido.setBounds(174, 37, 65, 14);
+			lblApellido.setBounds(174, 37, 65, 21);
 			panel.add(lblApellido);
 			
 			txtApellido = new JTextField();
-			txtApellido.setBounds(230, 34, 100, 20);
+			txtApellido.setBounds(230, 37, 100, 20);
 			panel.add(txtApellido);
 			txtApellido.setColumns(10);
 			
 					
 			
 			JLabel lblTelefono = new JLabel("Telefono:");
-			lblTelefono.setBounds(174, 81, 65, 14);
+			lblTelefono.setBounds(174, 81, 65, 21);
 			panel.add(lblTelefono);
 			
 			txtTelefono = new JFormattedTextField(tele);
-			txtTelefono.setBounds(230, 78, 100, 20);
+			txtTelefono.setBounds(230, 81, 100, 20);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
 			
-			JLabel lblDireccion = new JLabel("Direccion:");
-			lblDireccion.setBounds(10, 129, 65, 14);
+			JLabel lblDireccion = new JLabel("Direcci\u00F3n:");
+			lblDireccion.setBounds(10, 129, 65, 21);
 			panel.add(lblDireccion);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(66, 126, 264, 20);
+			txtDireccion.setBounds(66, 129, 264, 20);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
 			JLabel lblCorreo = new JLabel("Correo:");
-			lblCorreo.setBounds(10, 173, 46, 14);
+			lblCorreo.setBounds(10, 173, 46, 21);
 			panel.add(lblCorreo);
 			
 			txtCorreo = new JTextField();
-			txtCorreo.setBounds(66, 170, 264, 20);
+			txtCorreo.setBounds(66, 173, 264, 20);
 			panel.add(txtCorreo);
 			txtCorreo.setColumns(10);
 		}
