@@ -22,7 +22,7 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim;
-	private static Tienda tiend;
+	
 
 	/**
 	 * Launch the application.
@@ -31,7 +31,7 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal frame = new Principal(Tienda.getInstance());
+					Principal frame = new Principal();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 					
@@ -45,7 +45,7 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal(Tienda tienda) {
+	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		dim = super.getToolkit().getScreenSize();
