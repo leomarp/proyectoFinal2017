@@ -25,6 +25,8 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Color;
+import java.awt.Font;
 
 public class RegistrarProducto extends JDialog {
 
@@ -82,7 +84,7 @@ public class RegistrarProducto extends JDialog {
 		       panelTarjetaMadre.setBounds(10, 224, 462, 143);
 		       contentPanel.add(panelTarjetaMadre);
 		       panelTarjetaMadre.setLayout(null);
-		       panelTarjetaMadre.setVisible(false);
+		       panelTarjetaMadre.setVisible(true);
 		       
 		       JLabel lblTipoDeconector = new JLabel("Tipo de Conector:");
 		       lblTipoDeconector.setBounds(10, 33, 109, 14);
@@ -205,11 +207,11 @@ public class RegistrarProducto extends JDialog {
 		     panelMemoriaRam.add(cbxTipoRam);
 		
 		JLabel lblMarca = new JLabel("Marca:");
-		lblMarca.setBounds(10, 36, 46, 14);
+		lblMarca.setBounds(11, 132, 46, 14);
 		contentPanel.add(lblMarca);
 		
 		txtMarca = new JTextField();
-		txtMarca.setBounds(67, 33, 86, 20);
+		txtMarca.setBounds(67, 129, 86, 20);
 		contentPanel.add(txtMarca);
 		txtMarca.setColumns(10);
 		
@@ -223,11 +225,11 @@ public class RegistrarProducto extends JDialog {
 		txtModelo.setColumns(10);
 		
 		JLabel lblCodigo = new JLabel("Codigo:");
-		lblCodigo.setBounds(10, 132, 46, 14);
+		lblCodigo.setBounds(10, 36, 46, 14);
 		contentPanel.add(lblCodigo);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(67, 129, 86, 20);
+		txtCodigo.setBounds(66, 33, 86, 20);
 		contentPanel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
@@ -319,7 +321,7 @@ public class RegistrarProducto extends JDialog {
 				
 			}
 		});
-		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>", "Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
+		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"", "Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
 		cbxTipodeProducto.setBounds(326, 177, 126, 20);
 		contentPanel.add(cbxTipodeProducto);
 		{
@@ -332,8 +334,8 @@ public class RegistrarProducto extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						if(!txtMarca.getText().equalsIgnoreCase("") && !txtModelo.getText().equalsIgnoreCase("") && !txtPrecioCompra.getText().equalsIgnoreCase("") 
 								&& !txtPrecioVenta.getText().equalsIgnoreCase("") && !txtNumerodeSerie.getText().equalsIgnoreCase("") && cbxTipodeProducto.getSelectedIndex()!=0 ) {
-							if(cbxTipodeProducto.getSelectedItem().toString().equalsIgnoreCase("<Seleccione>")) {
-								JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  
+							if(cbxTipodeProducto.getSelectedItem().toString().equalsIgnoreCase("")) {
+								JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  
 							}
 							/*String marca = txtMarca.getText();
 							String modelo = txtModelo.getText();
@@ -363,7 +365,7 @@ public class RegistrarProducto extends JDialog {
 									Tienda.getInstance().AgregarComponentes(tarjeta);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
 									CleanTarjetaMadre();
-								}else { JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  }
+								}else { JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
 							}
@@ -385,7 +387,7 @@ public class RegistrarProducto extends JDialog {
 									Tienda.getInstance().AgregarComponentes(disco);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
 									CleanDiscoDuro();
-								}else {JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  }
+								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
 							}
@@ -410,7 +412,7 @@ public class RegistrarProducto extends JDialog {
 									Tienda.getInstance().AgregarComponentes(procesador);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
 									CleanMicroprocesador();
-								}else {JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  }
+								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
 								
@@ -435,7 +437,7 @@ public class RegistrarProducto extends JDialog {
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
 									CleanMemoriRam();
 									
-								}else {JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  }
+								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 							}
 							
 							
@@ -443,7 +445,7 @@ public class RegistrarProducto extends JDialog {
 							
 							
 							
-						}else {JOptionPane.showMessageDialog(null, "Datos Imcompletos",null, JOptionPane.WARNING_MESSAGE,null);  }
+						}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 						
 						
 						
@@ -539,9 +541,4 @@ public class RegistrarProducto extends JDialog {
 		
 		
 	}
-	
-	
-	
-	
-	
 }
