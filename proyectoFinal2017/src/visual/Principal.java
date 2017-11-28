@@ -26,7 +26,7 @@ public class Principal extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,7 +44,7 @@ public class Principal extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
+	 */ 
 	public Principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -173,7 +173,7 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/fotoPrin.jpg")));
+		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));
 		contentPane.add(label, BorderLayout.CENTER);
 	}
 

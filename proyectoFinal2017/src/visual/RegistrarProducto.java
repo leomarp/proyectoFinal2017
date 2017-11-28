@@ -321,7 +321,7 @@ public class RegistrarProducto extends JDialog {
 				
 			}
 		});
-		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"", "Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
+		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
 		cbxTipodeProducto.setBounds(326, 177, 126, 20);
 		contentPanel.add(cbxTipodeProducto);
 		{
