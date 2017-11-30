@@ -8,7 +8,16 @@ public class Componente {
 	protected int cantidad;
 	protected float precioCompra;
 	protected float precioVenta;
+	protected String nombre;
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public Componente() {
 		super();
 		// TODO Auto-generated constructor stub
