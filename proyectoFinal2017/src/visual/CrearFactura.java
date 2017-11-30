@@ -16,6 +16,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class CrearFactura extends JDialog {
 
@@ -36,6 +38,10 @@ public class CrearFactura extends JDialog {
 	private JTextField textField_12;
 	private JTextField textField_13;
 	private JTextField textField_14;
+	private JTextField textField_15;
+	private JTextField textField_16;
+	private JTextField textField_17;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -56,7 +62,7 @@ public class CrearFactura extends JDialog {
 	public CrearFactura() {
 		setTitle("Crear factura");
 		setResizable(false);
-		setBounds(100, 100, 598, 475);
+		setBounds(100, 100, 598, 561);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -257,7 +263,51 @@ public class CrearFactura extends JDialog {
 			spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spinner.setBounds(389, 72, 154, 20);
 			panel_1.add(spinner);
+			
+			JButton btnAgregarAlCarrito = new JButton("Agregar al carrito");
+			btnAgregarAlCarrito.setBounds(303, 100, 154, 23);
+			panel_1.add(btnAgregarAlCarrito);
 		}
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Lista de compra", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 284, 560, 167);
+		contentPanel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 22, 540, 134);
+		panel_1.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JLabel lblSubtotal = new JLabel("Subtotal:");
+		lblSubtotal.setBounds(26, 462, 56, 14);
+		contentPanel.add(lblSubtotal);
+		
+		JLabel lblDescuento = new JLabel("Descuento:");
+		lblDescuento.setBounds(202, 462, 72, 14);
+		contentPanel.add(lblDescuento);
+		
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setBounds(377, 462, 46, 14);
+		contentPanel.add(lblTotal);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(78, 459, 114, 20);
+		contentPanel.add(textField_15);
+		
+		textField_16 = new JTextField();
+		textField_16.setColumns(10);
+		textField_16.setBounds(264, 459, 103, 20);
+		contentPanel.add(textField_16);
+		
+		textField_17 = new JTextField();
+		textField_17.setColumns(10);
+		textField_17.setBounds(422, 459, 108, 20);
+		contentPanel.add(textField_17);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
