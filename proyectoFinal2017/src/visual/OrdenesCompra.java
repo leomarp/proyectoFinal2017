@@ -47,7 +47,7 @@ public class OrdenesCompra extends JDialog {
 			scrollPane.setBounds(10, 41, 751, 323);
 			panel.add(scrollPane);
 			
-			String[] columnsHeaders = {"ID","Nombre","Direccion","Prestamos"};
+			String[] columnsHeaders = {"Codigo", "Marca", "Modelo", "Cant. Disponible"};
 			tablamodelo = new DefaultTableModel();
 			tablamodelo.setColumnIdentifiers(columnsHeaders);
 			
@@ -61,14 +61,14 @@ public class OrdenesCompra extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnEliminar = new JButton("Hacer Pedido");
+				JButton btnEliminar = new JButton("Ordenar Componentes");
 				btnEliminar.setForeground(Color.BLACK);
-				btnEliminar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+				btnEliminar.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 				buttonPane.add(btnEliminar);
 			}
 			{
 				JButton cancelButton = new JButton("Cerrar");
-				cancelButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+				cancelButton.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
