@@ -1,55 +1,74 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class OrdenesCompra extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
+	
+	private JTable table;
+	private static DefaultTableModel tablamodelo;
+	static Object[] fila;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			OrdenesCompra dialog = new OrdenesCompra();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public OrdenesCompra() {
-		setTitle("Ordenar compra");
-		setResizable(false);
-		setBounds(100, 100, 450, 300);
+		
+		setBounds(100, 100, 807, 469);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Orden de compra", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
+			panel.setBounds(10, 22, 771, 375);
+			contentPanel.add(panel);
+			panel.setLayout(null);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 41, 751, 323);
+			panel.add(scrollPane);
+			
+			String[] columnsHeaders = {"ID","Nombre","Direccion","Prestamos"};
+			tablamodelo = new DefaultTableModel();
+			tablamodelo.setColumnIdentifiers(columnsHeaders);
+			
+			table = new JTable();
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setModel(tablamodelo);
+			scrollPane.setViewportView(table);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnEliminar = new JButton("Hacer Pedido");
+				btnEliminar.setForeground(Color.BLACK);
+				btnEliminar.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+				buttonPane.add(btnEliminar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cerrar");
+				cancelButton.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
@@ -59,6 +78,14 @@ public class OrdenesCompra extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		loadtable();
 	}
+
+
+	private void loadtable() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }
