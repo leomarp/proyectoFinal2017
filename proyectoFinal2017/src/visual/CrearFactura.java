@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class CrearFactura extends JDialog {
 
@@ -29,6 +31,11 @@ public class CrearFactura extends JDialog {
 	private JTextField textField_7;
 	private JTextField textField_9;
 	private JFormattedTextField formattedTextField;
+	private JTextField textField_10;
+	private JTextField textField_11;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
 
 	/**
 	 * Launch the application.
@@ -49,7 +56,7 @@ public class CrearFactura extends JDialog {
 	public CrearFactura() {
 		setTitle("Crear factura");
 		setResizable(false);
-		setBounds(100, 100, 637, 475);
+		setBounds(100, 100, 598, 475);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -126,7 +133,7 @@ public class CrearFactura extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(null, "Informaci\u00F3n del cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 11, 606, 129);
+		panel.setBounds(10, 11, 560, 129);
 		contentPanel.add(panel);
 		
 		JLabel label = new JLabel("Nombre:");
@@ -143,7 +150,7 @@ public class CrearFactura extends JDialog {
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(76, 100, 505, 20);
+		textField_5.setBounds(76, 100, 470, 20);
 		panel.add(textField_5);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
@@ -179,25 +186,90 @@ public class CrearFactura extends JDialog {
 		
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
-		textField_7.setBounds(356, 50, 225, 20);
+		textField_7.setBounds(356, 50, 190, 20);
 		panel.add(textField_7);
 		
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
-		textField_9.setBounds(356, 75, 225, 20);
+		textField_9.setBounds(356, 75, 190, 20);
 		panel.add(textField_9);
+		{
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(null, "Infomaci\u00F3n del producto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBounds(10, 144, 560, 135);
+			contentPanel.add(panel_1);
+			panel_1.setLayout(null);
+			
+			JLabel lblNewLabel = new JLabel("Codigo:");
+			lblNewLabel.setBounds(10, 25, 69, 14);
+			panel_1.add(lblNewLabel);
+			
+			JLabel lblComponente = new JLabel("Producto:");
+			lblComponente.setBounds(10, 50, 82, 14);
+			panel_1.add(lblComponente);
+			
+			JLabel lblModelo = new JLabel("Modelo:");
+			lblModelo.setBounds(323, 50, 69, 14);
+			panel_1.add(lblModelo);
+			
+			JLabel lblMarca = new JLabel("Marca:");
+			lblMarca.setBounds(10, 75, 69, 14);
+			panel_1.add(lblMarca);
+			
+			JLabel lblPrecio = new JLabel("Cantidad:");
+			lblPrecio.setBounds(323, 75, 69, 14);
+			panel_1.add(lblPrecio);
+			
+			textField_10 = new JTextField();
+			textField_10.setBounds(72, 22, 154, 20);
+			panel_1.add(textField_10);
+			textField_10.setColumns(10);
+			
+			textField_11 = new JTextField();
+			textField_11.setColumns(10);
+			textField_11.setBounds(72, 47, 154, 20);
+			panel_1.add(textField_11);
+			
+			textField_12 = new JTextField();
+			textField_12.setColumns(10);
+			textField_12.setBounds(72, 97, 154, 20);
+			panel_1.add(textField_12);
+			
+			textField_13 = new JTextField();
+			textField_13.setColumns(10);
+			textField_13.setBounds(389, 47, 154, 20);
+			panel_1.add(textField_13);
+			
+			textField_14 = new JTextField();
+			textField_14.setColumns(10);
+			textField_14.setBounds(72, 72, 154, 20);
+			panel_1.add(textField_14);
+			
+			JButton btnBuscar_1 = new JButton("Buscar");
+			btnBuscar_1.setBounds(303, 21, 89, 23);
+			panel_1.add(btnBuscar_1);
+			
+			JLabel lblCantidad = new JLabel("Precio:");
+			lblCantidad.setBounds(10, 100, 69, 14);
+			panel_1.add(lblCantidad);
+			
+			JSpinner spinner = new JSpinner();
+			spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
+			spinner.setBounds(389, 72, 154, 20);
+			panel_1.add(spinner);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Vender");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
