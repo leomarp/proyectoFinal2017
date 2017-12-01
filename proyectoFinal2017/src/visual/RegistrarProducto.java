@@ -321,7 +321,7 @@ public class RegistrarProducto extends JDialog {
 				
 			}
 		});
-		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
+		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"", "Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
 		cbxTipodeProducto.setBounds(326, 177, 126, 20);
 		contentPanel.add(cbxTipodeProducto);
 		{
@@ -364,7 +364,8 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(tarjeta);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									CleanTarjetaMadre();
+									//CleanTarjetaMadre();
+									CleanCompleto();
 								}else { JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
@@ -386,7 +387,8 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(disco);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									CleanDiscoDuro();
+									//CleanDiscoDuro();
+									CleanCompleto();
 								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
@@ -411,7 +413,8 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(procesador);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									CleanMicroprocesador();
+									//CleanMicroprocesador();
+									CleanCompleto();
 								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
 								
@@ -435,8 +438,8 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(memoria);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									CleanMemoriRam();
-									
+									//CleanMemoriRam();
+									CleanCompleto();
 								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 							}
 							
@@ -475,58 +478,10 @@ public class RegistrarProducto extends JDialog {
 	
 	
 	
-	private void CleanMemoriRam() {
-		
-		txtCodigo.setText("");
-		txtMarca.setText("");
-		txtModelo.setText("");
-		txtNumerodeSerie.setText("");
-		txtPrecioCompra.setText("");
-		txtPrecioVenta.setText("");
-		cbxTipodeProducto.setSelectedIndex(0);
-		//cbxCapacidadDiscoDuro.setSelectedIndex(0);
-		cbxCapacidadRam.setSelectedIndex(0);
-		//cbxTipoConexionDiscoDuro.setSelectedIndex(0);
-		//cbxTipoConexionTarjetaMadre.setSelectedIndex(0);
-		cbxTipoRam.setSelectedIndex(0);
-		//cbxTipoRamTarjetaMadre.setSelectedIndex(0);
-		//cbxTipoSoketMicroProcesador.setSelectedIndex(0);
-		//cbxTipoSoketTarjetaMadre.setSelectedIndex(0);
-		//cbxVelocidadDiscoDuro.setSelectedIndex(0);
-		//cbxVelocidadMicroProcesador.setSelectedIndex(0);
-		cbxVelocidadRam.setSelectedIndex(0);
-		spnCantidad.setValue(1);
-	}
 	
-	
-	private void CleanDiscoDuro() {
-		txtCodigo.setText("");
-		txtMarca.setText("");
-		txtModelo.setText("");
-		txtNumerodeSerie.setText("");
-		txtPrecioCompra.setText("");
-		txtPrecioVenta.setText("");
-		cbxTipodeProducto.setSelectedIndex(0);
-		cbxCapacidadDiscoDuro.setSelectedIndex(0);
-		cbxVelocidadDiscoDuro.setSelectedIndex(0);
-		cbxTipoConexionDiscoDuro.setSelectedIndex(0);
-		spnCantidad.setValue(1);
-	} 
-	private void CleanTarjetaMadre() {
-		txtCodigo.setText("");
-		txtMarca.setText("");
-		txtModelo.setText("");
-		txtNumerodeSerie.setText("");
-		txtPrecioCompra.setText("");
-		txtPrecioVenta.setText("");
-		cbxTipodeProducto.setSelectedIndex(0);
-		cbxTipoConexionTarjetaMadre.setSelectedIndex(0);
-		cbxTipoRamTarjetaMadre.setSelectedIndex(0);
-		cbxTipoSoketTarjetaMadre.setSelectedIndex(0);
-		spnCantidad.setValue(1);
+	public void CleanCompleto() {
 		
-	}
-	private void CleanMicroprocesador() {
+		
 		txtCodigo.setText("");
 		txtMarca.setText("");
 		txtModelo.setText("");
@@ -537,8 +492,16 @@ public class RegistrarProducto extends JDialog {
 		cbxVelocidadMicroProcesador.setSelectedIndex(0);
 		cbxTipoSoketMicroProcesador.setSelectedIndex(0);
 		spnCantidad.setValue(1);
+		cbxTipoConexionTarjetaMadre.setSelectedIndex(0);
+		cbxTipoRamTarjetaMadre.setSelectedIndex(0);
+		cbxTipoSoketTarjetaMadre.setSelectedIndex(0);
+		cbxCapacidadDiscoDuro.setSelectedIndex(0);
+		cbxVelocidadDiscoDuro.setSelectedIndex(0);
+		cbxTipoConexionDiscoDuro.setSelectedIndex(0);
+		cbxCapacidadRam.setSelectedIndex(0);
 		
+		cbxTipoRam.setSelectedIndex(0);
 		
-		
+		cbxVelocidadRam.setSelectedIndex(0);
 	}
 }
