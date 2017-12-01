@@ -17,11 +17,16 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim;
+	private JButton btnVender;
+	private JButton btnCombo;
 	
 
 	/**
@@ -46,6 +51,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */ 
 	public Principal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Fotos/if_computer__desktop__electronic__pc__monitor__screen__technology_2317975.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		dim = super.getToolkit().getScreenSize();
@@ -169,13 +175,41 @@ public class Principal extends JFrame {
 		mnInventario.add(mntmOrdenesDeCompras);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		btnCombo = new JButton("");
+		btnCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Combo com= new Combo();
+				com.setModal(true);
+				com.setLocationRelativeTo(null);
+				com.setVisible(true);
+			}
+		});
+		btnCombo.setBackground(Color.BLACK);
+		btnCombo.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/if_08_Sales_1871425 (1).png")));
+		btnCombo.setBounds(826, 79, 67, 58);
+		contentPane.add(btnCombo);
+		
+		btnVender = new JButton("");
+		btnVender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearFactura reg = new CrearFactura();
+				reg.setModal(true);
+				reg.setLocationRelativeTo(null);
+				reg.setVisible(true);
+				}
+		});
+		btnVender.setBackground(Color.BLACK);
+		btnVender.setForeground(Color.BLACK);
+		btnVender.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/if_12_Bills_1871414(2).png")));
+		btnVender.setBounds(691, 79, 67, 58);
+		contentPane.add(btnVender);
 		
 		JLabel label = new JLabel("");
+		label.setBounds(10, 0, 1574, 790);
 		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));
-		contentPane.add(label, BorderLayout.CENTER);
+		contentPane.add(label);
 	}
-
-
 }

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
@@ -18,6 +19,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ImageIcon;
 
 public class CrearFactura extends JDialog {
 
@@ -27,9 +29,9 @@ public class CrearFactura extends JDialog {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField txtDireccion;
-	private JTextField txtCedula;
+	private JFormattedTextField txtCedula;
 	private JTextField txtNombre;
-	private JTextField txtTelefono;
+	private JFormattedTextField txtTelefono;
 	private JTextField txtApellido;
 	private JTextField txtCorreo;
 	private JFormattedTextField formattedTextField;
@@ -38,14 +40,19 @@ public class CrearFactura extends JDialog {
 	private JTextField txtPrecio;
 	private JTextField txtModelo;
 	private JTextField txtMarca;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_17;
+	private JTextField txtSubTotal;
+	private JTextField txtDescuento;
+	private JTextField txtTotal;
 	private JTable table;
+	private JButton btnBuscarCodigo;
+	private JSpinner spnCantidad ;
+	private JButton btnVender;
+	private static MaskFormatter formato;
+	private static MaskFormatter telef;	
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			CrearFactura dialog = new CrearFactura();
@@ -67,6 +74,13 @@ public class CrearFactura extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		try {
+			formato = new MaskFormatter("###-#######-#");
+			telef = new MaskFormatter("(###)-###-####");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		{
 			JPanel panel = new JPanel();
 			panel.setBounds(349, 10, 1, 1);
@@ -171,11 +185,12 @@ public class CrearFactura extends JDialog {
 		label_5.setBounds(300, 75, 46, 21);
 		panel.add(label_5);
 		
-		JButton btnBuscarCedula = new JButton("Buscar");
-		btnBuscarCedula.setBounds(300, 24, 89, 23);
+		JButton btnBuscarCedula = new JButton("");
+		btnBuscarCedula.setIcon(new ImageIcon(CrearFactura.class.getResource("/Fotos/if_Search_858732.png")));
+		btnBuscarCedula.setBounds(300, 24, 46, 24);
 		panel.add(btnBuscarCedula);
 		
-		txtCedula = new JTextField();
+		txtCedula = new JFormattedTextField(formato);
 		txtCedula.setColumns(10);
 		txtCedula.setBounds(76, 25, 199, 20);
 		panel.add(txtCedula);
@@ -185,7 +200,7 @@ public class CrearFactura extends JDialog {
 		txtNombre.setBounds(76, 50, 199, 20);
 		panel.add(txtNombre);
 		
-		txtTelefono = new JTextField();
+		txtTelefono = new JFormattedTextField(telef);
 		txtTelefono.setColumns(10);
 		txtTelefono.setBounds(76, 75, 199, 20);
 		panel.add(txtTelefono);
@@ -251,21 +266,22 @@ public class CrearFactura extends JDialog {
 			txtMarca.setBounds(72, 72, 199, 20);
 			panel_1.add(txtMarca);
 			
-			JButton btnBuscarCodigo = new JButton("Buscar");
-			btnBuscarCodigo.setBounds(303, 21, 89, 23);
+			btnBuscarCodigo = new JButton("");
+			btnBuscarCodigo.setIcon(new ImageIcon(CrearFactura.class.getResource("/Fotos/if_Search_858732.png")));
+			btnBuscarCodigo.setBounds(300, 21, 46, 24);
 			panel_1.add(btnBuscarCodigo);
 			
 			JLabel lblCantidad = new JLabel("Precio:");
 			lblCantidad.setBounds(10, 100, 69, 14);
 			panel_1.add(lblCantidad);
 			
-			JSpinner spnCantidad = new JSpinner();
+			spnCantidad = new JSpinner();
 			spnCantidad.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 			spnCantidad.setBounds(356, 72, 190, 20);
 			panel_1.add(spnCantidad);
 			
 			JButton btnAgregarAlCarrito = new JButton("Agregar al carrito");
-			btnAgregarAlCarrito.setBounds(303, 100, 154, 23);
+			btnAgregarAlCarrito.setBounds(300, 100, 154, 23);
 			panel_1.add(btnAgregarAlCarrito);
 		}
 		
@@ -294,26 +310,26 @@ public class CrearFactura extends JDialog {
 		lblTotal.setBounds(377, 462, 46, 14);
 		contentPanel.add(lblTotal);
 		
-		textField_15 = new JTextField();
-		textField_15.setColumns(10);
-		textField_15.setBounds(78, 459, 114, 20);
-		contentPanel.add(textField_15);
+		txtSubTotal = new JTextField();
+		txtSubTotal.setColumns(10);
+		txtSubTotal.setBounds(78, 459, 114, 20);
+		contentPanel.add(txtSubTotal);
 		
-		textField_16 = new JTextField();
-		textField_16.setColumns(10);
-		textField_16.setBounds(264, 459, 103, 20);
-		contentPanel.add(textField_16);
+		txtDescuento = new JTextField();
+		txtDescuento.setColumns(10);
+		txtDescuento.setBounds(270, 459, 103, 20);
+		contentPanel.add(txtDescuento);
 		
-		textField_17 = new JTextField();
-		textField_17.setColumns(10);
-		textField_17.setBounds(422, 459, 108, 20);
-		contentPanel.add(textField_17);
+		txtTotal = new JTextField();
+		txtTotal.setColumns(10);
+		txtTotal.setBounds(422, 459, 108, 20);
+		contentPanel.add(txtTotal);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnVender = new JButton("Vender");
+				btnVender = new JButton("Vender");
 				btnVender.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}
