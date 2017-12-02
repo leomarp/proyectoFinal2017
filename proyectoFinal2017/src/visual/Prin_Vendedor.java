@@ -1,27 +1,24 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logic.Tienda;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Toolkit;
-
-public class Principal extends JFrame {
+public class Prin_Vendedor extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dim;
@@ -50,7 +47,7 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */ 
-	public Principal() {
+	public Prin_Vendedor() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Fotos/if_computer__desktop__electronic__pc__monitor__screen__technology_2317975.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,18 +58,6 @@ public class Principal extends JFrame {
 		
 		JMenu mnCliente = new JMenu("Clientes");
 		menuBar.add(mnCliente);
-		
-		JMenuItem mntmRegistrarCliente = new JMenuItem("Registrar Cliente");
-		mntmRegistrarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistrarCliente reg = new RegistrarCliente();
-				reg.setModal(true);
-				reg.setLocationRelativeTo(null);
-				reg.setVisible(true);
-			
-			}
-		});
-		mnCliente.add(mntmRegistrarCliente);
 		
 		JMenuItem mntmListarClientes = new JMenuItem("Listar Clientes");
 		mntmListarClientes.addActionListener(new ActionListener() {
@@ -99,16 +84,16 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu.add(mntmRegistrarProducto);
 		
-		/*JMenuItem mntmListarProducto = new JMenuItem("Listar Producto");
+		JMenuItem mntmListarProducto = new JMenuItem("Listar Producto");// es la misma ventana que inventario 
 		mntmListarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarProducto list = new ListarProducto();
-				list.setModal(true);
-				list.setLocationRelativeTo(null);
-				list.setVisible(true);
+				Inventario invent = new Inventario();
+				invent.setModal(true);
+				invent.setLocationRelativeTo(null);
+				invent.setVisible(true);
 			}
 		});
-		mnNewMenu.add(mntmListarProducto);*/
+		mnNewMenu.add(mntmListarProducto);
 		
 		JMenu mnVenta = new JMenu("Ventas");
 		menuBar.add(mnVenta);
@@ -148,31 +133,6 @@ public class Principal extends JFrame {
 			}
 		});
 		mnCombos.add(mntmVerCombos);
-		
-		JMenu mnInventario = new JMenu("Inventario");
-		menuBar.add(mnInventario);
-		
-		JMenuItem mntmInventario = new JMenuItem("Inventario");
-		mntmInventario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Inventario invent = new Inventario();
-				invent.setModal(true);
-				invent.setLocationRelativeTo(null);
-				invent.setVisible(true);
-			}
-		});
-		mnInventario.add(mntmInventario);
-		
-		JMenuItem mntmOrdenesDeCompras = new JMenuItem("Ordenes de Compras");
-		mntmOrdenesDeCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				OrdenesCompra ordenCompra = new OrdenesCompra();
-				ordenCompra.setModal(true);
-				ordenCompra.setLocationRelativeTo(null);
-				ordenCompra.setVisible(true);
-			}
-		});
-		mnInventario.add(mntmOrdenesDeCompras);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
