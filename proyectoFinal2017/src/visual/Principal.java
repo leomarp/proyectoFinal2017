@@ -195,6 +195,20 @@ public class Principal extends JFrame {
 		btnVender.setBounds(691, 79, 67, 58);
 		contentPane.add(btnVender);
 		
+		JButton btnGrafica = new JButton("");
+		btnGrafica.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/if_Tablet-Chart_379405 (1).png")));
+		btnGrafica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Grafica graf = new Grafica();
+				graf.setModal(true);
+				graf.setLocationRelativeTo(null);
+				graf.setVisible(true);
+			}
+		});
+		btnGrafica.setBackground(Color.BLACK);
+		btnGrafica.setBounds(963, 79, 67, 58);
+		contentPane.add(btnGrafica);
+		
 		JLabel label = new JLabel("");
 		label.setBounds(10, 0, 1574, 790);
 		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));

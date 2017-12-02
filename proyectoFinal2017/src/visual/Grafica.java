@@ -52,8 +52,8 @@ public class Grafica extends JDialog {
 				// Fuente de Datos
 		        DefaultPieDataset data1 = new DefaultPieDataset();
 		        data1.setValue("Disco Duro", 30);
-		        data1.setValue("Tarjeta Madre", 40);
-		        data1.setValue("Ram", 15);
+		        data1.setValue("Tarjeta Madre", 30);
+		        data1.setValue("Ram", 25);
 		        data1.setValue("Micro", 15);
 
 		        // 
@@ -77,6 +77,11 @@ public class Grafica extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
