@@ -27,7 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 
 
 
-public class Combo extends JDialog {
+public class Combos extends JDialog {
 	
 
 	private ArrayList<Componente>miscomponentes;
@@ -51,7 +51,7 @@ public class Combo extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Combo dialog = new Combo();
+			Combos dialog = new Combos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -62,7 +62,7 @@ public class Combo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Combo() {
+	public Combos() {
 		setTitle("Combos");
 		setResizable(false);
 		setBounds(100, 100, 864, 601);
@@ -206,7 +206,7 @@ public class Combo extends JDialog {
 				
 			}else{
 				
-				Combo co=new Combo();
+				Combos co=new Combos();
 				for(int i=0;i<miscombos.size();i++) {
 					
 					//co.getMiCombo().add(miscombos.get(i));

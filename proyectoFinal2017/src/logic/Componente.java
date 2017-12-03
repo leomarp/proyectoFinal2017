@@ -10,6 +10,16 @@ public class Componente {
 	protected float precioVenta;
 	protected String nombre;
 	
+	public int getCompvendidos() {
+		return compvendidos;
+	}
+
+	public void setCompvendidos(int compvendidos) {
+		this.compvendidos = compvendidos;
+	}
+
+	protected int compvendidos;
+	
 	public String getNombre() {
 		return nombre;
 	}

@@ -129,7 +129,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmVerCombos = new JMenuItem("Ver Combos");
 		mntmVerCombos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Combo comb = new Combo();
+				Combos comb = new Combos();
 				comb.setModal(true);
 				comb.setLocationRelativeTo(null);
 				comb.setVisible(true);
@@ -169,7 +169,7 @@ public class Principal extends JFrame {
 		btnCombo = new JButton("");
 		btnCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Combo com= new Combo();
+				Combos com= new Combos();
 				com.setModal(true);
 				com.setLocationRelativeTo(null);
 				com.setVisible(true);

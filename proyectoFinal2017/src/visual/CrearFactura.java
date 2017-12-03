@@ -8,10 +8,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
+
+import logic.Tienda;
+import logic.Componente;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
@@ -49,6 +55,7 @@ public class CrearFactura extends JDialog {
 	private JButton btnVender;
 	private static MaskFormatter formato;
 	private static MaskFormatter telef;	
+	private ArrayList<Componente> carrito;
 
 	/**
 	 * Launch the application.
@@ -281,6 +288,52 @@ public class CrearFactura extends JDialog {
 			panel_1.add(spnCantidad);
 			
 			JButton btnAgregarAlCarrito = new JButton("Agregar al carrito");
+			btnAgregarAlCarrito.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(spnCantidad.getValue().toString().equalsIgnoreCase("0")){
+						JOptionPane.showMessageDialog(null, "Digite una cantidad");
+					}
+					else{
+					Componente c= new Componente();
+					for(int i=0; i<Tienda.getInstance().getMisComponentes().size();i++){
+						if(Tienda.getInstance().getMisComponentes().get(i).getCodigo().equalsIgnoreCase(txtCodigo.getText())){
+							if(Integer.parseInt(spnCantidad.getValue().toString()) < Tienda.getInstance().getMisComponentes().get(i).getCantidad()){
+								c=Tienda.getInstance().getMisComponentes().get(i);
+							
+																
+								float precioventa=Integer.parseInt(spnCantidad.getValue().toString()) * c.getPrecioVenta();
+								c.setPrecioVenta(precioventa);
+								c.setCompvendidos(Integer.parseInt(spnCantidad.getValue().toString()));
+								Tienda.getInstance().getMisComponentes().get(i).setCantidad(Tienda.getInstance().getMisComponentes().get(i).getCantidad()-Integer.parseInt(spnCantidad.getValue().toString()));
+							
+								carrito.add(c);   
+								//cargarCarrito();  
+								CleanComponente();
+								
+								
+								
+								
+								
+								
+								
+								//txtTotal.setText(Float.toString(Float.parseFloat(txtSubTotal.getText())-k) );
+								
+								if(Tienda.getInstance().VerificarCantidadMinima(c)  ){
+									JOptionPane.showMessageDialog(null, "Se alcanzó la cantidad mínima, Por favor Revise el inventario para ordenar más de este componente.");
+								}
+								
+								
+							}
+							else
+								JOptionPane.showMessageDialog(null, "Digite una cantidad menor a la Disponible");
+								
+						}
+					}
+					}
+					
+					
+				}
+			});
 			btnAgregarAlCarrito.setBounds(300, 100, 154, 23);
 			panel_1.add(btnAgregarAlCarrito);
 		}
@@ -350,4 +403,29 @@ public class CrearFactura extends JDialog {
 			}
 		}
 	}
+	
+	
+	
+	public void CleanComponente(){
+		
+		spnCantidad.setValue(0);
+		txtCodigo.setText("");
+		txtProducto.setText("");
+		txtMarca.setText("");
+		txtModelo.setText("");
+		txtPrecio.setText("");
+	}
+	
+	public void CleanCliente() {
+		txtApellido.setText("");
+		txtCedula.setText("");
+		txtNombre.setText("");
+		txtTelefono.setText("");
+		txtDireccion.setText("");
+		txtCorreo.setText("");
+		
+		
+		
+	}
+	
 }
