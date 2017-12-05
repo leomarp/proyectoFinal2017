@@ -6,8 +6,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import logic.Tienda;
 
 import javax.swing.JMenuBar;
@@ -30,12 +32,13 @@ public class Principal extends JFrame {
 	
 
 	/**
-	 */// Launch the application.
+	 /// Launch the application.
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Principal frame = new Principal();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
