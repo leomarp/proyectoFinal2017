@@ -1,12 +1,17 @@
 package logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
 
-
-public class Tienda {
+public class Tienda implements Serializable{
 	private ArrayList<Cliente>misClientes;
 	private ArrayList<Factura>misFacturas;
 	private ArrayList<Componente>misComponentes;
@@ -23,7 +28,20 @@ public class Tienda {
 	
 	}
 
-
+	
+	public ArrayList<Componente> getComboComponentes(String nombre){
+		ArrayList<Componente> c= null;
+		
+		for (int i = 0; i < misCombos.size(); i++) {
+			if (Tienda.getInstance().misCombos.get(i).getNombre().equalsIgnoreCase(nombre)){
+				c=misCombos.get(i).getMiCombo();
+				
+			}
+		}
+		
+		return c;
+	}
+	
 	public ArrayList<Cliente> getMisClientes() {
 		return misClientes;
 	}
@@ -72,21 +90,96 @@ public class Tienda {
 			return tienda;
 		}
 	
+		public boolean guardar(){
+			if(crearDatos(Tienda.getInstance())){	
+				return true;
+			}else{return false;}
+		}
 		
+		public boolean crearDatos(Tienda emp) {
+			
+		FileOutputStream f;
+		try {
+			f = new FileOutputStream ("Tienda.dat");
+			ObjectOutputStream oos 	= new ObjectOutputStream (f);
+			
+			oos.writeObject(emp);
+			f.close();
+			return true;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+		}
+			
+			
+		public boolean abrirDatos() {
+		FileInputStream f;
+		try {
+			f = new FileInputStream ("Tienda.dat");
+			ObjectInputStream oos = new ObjectInputStream(f);
+			Tienda emp=null;
+			emp=(Tienda)oos.readObject();
+			f.close();
+			tienda=emp;
+			return true;
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+			return false;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			return false;
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+			
+		}	
 		
 		
 	public void AgregarCliente(Cliente cliente) {
-		if(!misClientes.contains(cliente)) {
+		
 			misClientes.add(cliente);
-		}
+			guardar();
 	}	
-		
-		
+			
 	public void AgregarComponentes(Componente componente) {
 		misComponentes.add(componente);
-		
+		guardar();
 	}	
+	public void AgregarFactura(Factura factura) {
+		misFacturas.add(factura);
+		guardar();
+	}	
+	public void AgregarCombo(Combo combo) {
+		misCombos.add(combo);
+		guardar();
+	}	
+	
+	public String tipoDeComponente(Componente aux){
+		if(aux instanceof DiscoDuro ) {
+			 return "Disco Duro";
+		 }
+		if(aux instanceof MemoriaRam ) {
+			 return "Memoria Ram";
+		 }
+		if(aux instanceof Procesador ) {
+			 return "Procesador";
+		 }
+		if(aux instanceof TarjetaMadre ) {
+			 return "Tarjeta Madre";
+		 }
+		return null;
 		
+	}
 	
 	public int CantidadDiscosDuros() {
 		int cant=0;
@@ -99,7 +192,7 @@ public class Tienda {
 		
 		 return cant;
 	}
-		
+		        
 	public int CantidadMemoriasRam() {
 		int cant=0;
 		 for (Componente aux : misComponentes) {
@@ -112,7 +205,6 @@ public class Tienda {
 		 return cant;
 	}	
 		
-	
 	public int CantidadProcesadores() {
 		int cant=0;
 		 for (Componente aux : misComponentes) {
@@ -138,7 +230,7 @@ public class Tienda {
 	}	
 		
 	
-	public Cliente BuescarCliente(String cedula) {
+	public Cliente BuscarCliente(String cedula) {
 		Cliente cliente=null;
 		for (Cliente aux : misClientes) {
 			if(aux.getCedula().equalsIgnoreCase(cedula)) {
@@ -159,7 +251,7 @@ public class Tienda {
 		
 	}
 	
-	public ArrayList<Componente> LLlenarListaDeOrdenes(){
+	public ArrayList<Componente> LlenarListaDeOrdenes(){
 		ArrayList<Componente> componentes=new ArrayList<Componente>();
 		for(int i=0;i<misComponentes.size();i++) {
 			if(misComponentes.get(i).getCantidad()<=5) {
@@ -179,7 +271,7 @@ public class Tienda {
 	}
 	
 	public Componente BuescarCodigoComponente(String cod) {
-		Componente com=new Componente();
+		Componente com=null;
 		for (Componente aux : misComponentes) {
 			if(aux.getCodigo().equalsIgnoreCase(cod)) {
 				com=aux;
@@ -188,8 +280,18 @@ public class Tienda {
 		}
 		return com;
 	}
+	public boolean existeComponente(String cod){
+		for (Componente aux : misComponentes) {
+			if(aux.getCodigo().equalsIgnoreCase(cod)) {
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
 	
-	public Factura BuscarFactura(String cod) {
+ 	public Factura BuscarFactura(String cod) {
 		Factura fac=null;
 		for(Factura aux: misFacturas) {
 			if(aux.getCodigo().equalsIgnoreCase(cod)) {
@@ -219,3 +321,4 @@ public class Tienda {
 	}
 	
 }
+
