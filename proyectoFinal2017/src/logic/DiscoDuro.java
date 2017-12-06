@@ -1,6 +1,8 @@
 package logic;
 
-public class DiscoDuro extends Componente {
+import java.io.Serializable;
+
+public class DiscoDuro extends Componente implements Serializable{
 
 	
 	private String capacidad;

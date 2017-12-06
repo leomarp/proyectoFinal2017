@@ -14,10 +14,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
-public class LogIn extends JDialog {
+public class LogIn extends JDialog implements Serializable{
 
 	/**
 	 * 

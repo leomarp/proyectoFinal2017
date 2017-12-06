@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -21,60 +22,42 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import logic.Combo;
 import logic.Componente;
 import logic.Tienda;
 import javax.swing.DefaultComboBoxModel;
 
 
 
-public class Combos extends JDialog {
+public class Combos extends JDialog implements Serializable{
 	
 
 	private ArrayList<Componente>miscomponentes;
-	private static DefaultTableModel modelComboCreado;
-	private static DefaultTableModel modelTodo,modelCombo;
+	private static DefaultTableModel modelComponentes,modelCombos,modelTodoscombos;
+	
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtNombre;
 	private JTextField txtNombreCombo;
-	private JTextField txtNumeroCombo;
-	private JTable tableDeCombos;
+	private JTable tableComboTodos;
 	private JTable tableComponentes;
-	private JTable tableCombosPorCrear;
+	private JTable tableComboNew;
 	static Object[] fila;
 	private ArrayList<Componente>miscombos;
 	private JComboBox<String> cbxCombos;
 	
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Combos dialog = new Combos();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public Combos() {
 		setTitle("Combos");
 		setResizable(false);
-		setBounds(100, 100, 864, 601);
+		setBounds(100, 100, 881, 607);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		contentPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos Combo PC Parts", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		miscombos = new ArrayList<Componente>();
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Combos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 298, 838, 230);
+		panel.setBounds(10, 268, 859, 237);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -83,118 +66,70 @@ public class Combos extends JDialog {
 		panel.add(lblCombos);
 		
 		cbxCombos = new JComboBox();
-		cbxCombos.setModel(new DefaultComboBoxModel(new String[] {"<Seleccione>"}));
-		cbxCombos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(cbxCombos.getSelectedIndex()>0) {
-					CargarCombosCreados(cbxCombos.getSelectedIndex()-1);
-					txtNombre.setText(Tienda.getInstance().getMisCombos().get(cbxCombos.getSelectedIndex()-1).getNombre());
-					
-				}else {modelComboCreado.setRowCount(0); }
-			}
-		});
 		cbxCombos.setBounds(58, 28, 138, 20);
 		panel.add(cbxCombos);
-		cbxCombos.addItem("<Seleccione>");
-		for(int k=0;k<Tienda.getInstance().getMisCombos().size();k++) {
-			cbxCombos.addItem(Integer.toString(k+1));
-		}
+		cargarCombosComboBox();
+		
+		JScrollPane scrollComboTodos = new JScrollPane();
+		scrollComboTodos.setBounds(10, 69, 839, 152);
+		panel.add(scrollComboTodos);
+		
+		tableComboTodos = new JTable();
+		modelTodoscombos = new DefaultTableModel();
+		
+		String[] columnNames = {"Tipo","Codigo","Marca", "Modelo", "P.Venta"};
+		modelTodoscombos.setColumnIdentifiers(columnNames);
+		tableComboTodos.setModel(modelTodoscombos);
+		
+		scrollComboTodos.setViewportView(tableComboTodos);
+		int index=cbxCombos.getSelectedIndex();
+		CargarComponentes(modelTodoscombos,Tienda.getInstance().getComboComponentes(index));
+		
+		
+		JButton btnCargar = new JButton("Cargar");
+		btnCargar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			
-		
-		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(216, 31, 62, 14);
-		panel.add(lblNombre);
-		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(269, 28, 138, 20);
-		panel.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		JScrollPane scrollPaneCombosCreados = new JScrollPane();
-		scrollPaneCombosCreados.setBounds(10, 69, 818, 152);
-		panel.add(scrollPaneCombosCreados);
-		
-		tableDeCombos = new JTable();
-		scrollPaneCombosCreados.setColumnHeaderView(tableDeCombos);
+				if(cbxCombos.getSelectedIndex()!=0){
+					int index=cbxCombos.getSelectedIndex();
+					System.out.println("Index:" +index);
+//					System.out.println(cbxCombos.getSelectedItem().toString());
+					System.out.println("elementos del combo" +Tienda.getInstance().getComboComponentes(index) );
+					CargarComponentes(modelTodoscombos,Tienda.getInstance().getComboComponentes(index) );
+				}
+			
+			}
+		});
+		btnCargar.setBounds(206, 27, 89, 23);
+		panel.add(btnCargar);
 		
 		JLabel lblNombreDelCombo = new JLabel("Nombre del Combo:");
-		lblNombreDelCombo.setBounds(10, 33, 145, 14);
+		lblNombreDelCombo.setBounds(10, 30, 145, 14);
 		contentPanel.add(lblNombreDelCombo);
 		
 		txtNombreCombo = new JTextField();
-		txtNombreCombo.setBounds(133, 30, 145, 20);
+		txtNombreCombo.setBounds(133, 27, 145, 20);
 		contentPanel.add(txtNombreCombo);
 		txtNombreCombo.setColumns(10);
 		
-		JLabel lblNumeroDeCombo = new JLabel("Numero de Combo:");
-		lblNumeroDeCombo.setBounds(10, 63, 145, 14);
-		contentPanel.add(lblNumeroDeCombo);
-		
-		txtNumeroCombo = new JTextField();
-		txtNumeroCombo.setBounds(133, 60, 145, 20);
-		contentPanel.add(txtNumeroCombo);
-		txtNumeroCombo.setColumns(10);
-		
-		JScrollPane scrollPaneTodos = new JScrollPane();
-		scrollPaneTodos.setBounds(10, 113, 320, 174);
-		contentPanel.add(scrollPaneTodos);
-		
-		tableComponentes = new JTable();
-		modelTodo=new DefaultTableModel();
-		
-		String [] columnNames1= {"Código","Tipo","Modelo","Precio"};
-		modelTodo.setColumnIdentifiers(columnNames1);
-		
-		tableComponentes=new JTable(modelTodo);
-		
-		tableComponentes.getColumnModel().getColumn(0).setPreferredWidth(59);
-		tableComponentes.getColumnModel().getColumn(0).setMinWidth(59);
-		tableComponentes.getColumnModel().getColumn(0).setMaxWidth(59);
-		tableComponentes.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tableComponentes.getColumnModel().getColumn(1).setMinWidth(100);
-		tableComponentes.getColumnModel().getColumn(1).setMaxWidth(100);
-		scrollPaneTodos.setColumnHeaderView(tableComponentes);
-		
-		CargarMisComponentes();
-		
-		JScrollPane scrollPaneCombo = new JScrollPane();
-		scrollPaneCombo.setBounds(514, 113, 334, 174);
-		contentPanel.add(scrollPaneCombo);
-		
-		
-		
-		tableCombosPorCrear = new JTable();
-		modelCombo=new  DefaultTableModel();
-		modelCombo.setColumnIdentifiers(columnNames1);
-		tableCombosPorCrear.setModel(modelCombo);
-		tableCombosPorCrear.getColumnModel().getColumn(0).setPreferredWidth(59);
-		tableCombosPorCrear.getColumnModel().getColumn(0).setMinWidth(59);
-		tableCombosPorCrear.getColumnModel().getColumn(0).setMaxWidth(59);
-		tableCombosPorCrear.getColumnModel().getColumn(1).setPreferredWidth(100);
-		tableCombosPorCrear.getColumnModel().getColumn(1).setMinWidth(100);
-		tableCombosPorCrear.getColumnModel().getColumn(1).setMaxWidth(100);
-		
-		scrollPaneCombo.setColumnHeaderView(tableCombosPorCrear);
-		
-		JLabel lblComponentes = new JLabel("Componentes");
-		lblComponentes.setBounds(10, 98, 85, 14);
-		contentPanel.add(lblComponentes);
-		
-		JLabel lblCombos_1 = new JLabel("Combo");
-		lblCombos_1.setBounds(529, 98, 56, 14);
-		contentPanel.add(lblCombos_1);
 		
 		JButton buttonseleccion = new JButton(">");
 		buttonseleccion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Componente co=new Componente();
-				co=Tienda.getInstance().getMisComponentes().get(tableComponentes.getSelectedRow());
-				miscombos.add(co);
-				CargarPreCombo();
+				int row=tableComponentes.getSelectedRow();
+				
+				if(row!=-1){
+					//Agregar compnente a la tabla de nuevos componentes de nuevo combo. 
+					Componente c = Tienda.getInstance().getMisComponentes().get(row);
+					miscombos.add(c);
+					CargarComponentes(modelCombos,miscombos);
+				}
+				
+				
 			}
 		});
-		buttonseleccion.setBounds(372, 147, 104, 23);
+		buttonseleccion.setBounds(385, 117, 104, 23);
 		contentPanel.add(buttonseleccion);
 		
 		JButton btnCrearCombo = new JButton("Crear Combo");
@@ -205,23 +140,26 @@ public class Combos extends JDialog {
 				JOptionPane.showMessageDialog(null, "Escriba un nombre para el Combo");
 				
 			}else{
-				
-				Combos co=new Combos();
-				for(int i=0;i<miscombos.size();i++) {
+				if(miscombos.size()==0  ){
+					JOptionPane.showMessageDialog(null, "Añadir Componentes a la nueva tabla.");
 					
-					//co.getMiCombo().add(miscombos.get(i));
 				}
-				//co.setNombre(txtNombreCombo.getText());
-				//Tienda.getInstance().getMisCombos().add(co);
-				cbxCombos.removeAllItems();
-				cbxCombos.addItem("<Seleccione>");
-				for(int k=0;k<Tienda.getInstance().getMisCombos().size();k++) {
-					cbxCombos.addItem(Integer.toString(k+1));
+				else if(Tienda.getInstance().existeCombo(txtNombreCombo.getText())){
+					JOptionPane.showMessageDialog(null, "Seleccione otro nombre para el combo");
+					
 				}
-				//cbxCombos
+				else{
+				Combo co=new Combo();
+				
+				co.setNombre(txtNombreCombo.getText() );
+				co.setMiCombo(miscombos);
+				
+				Tienda.getInstance().AgregarCombo(co);
 				miscombos.clear();
-				CargarPreCombo();
-				txtNumeroCombo.setText(Integer.toString(Tienda.getInstance().getMisCombos().size()+1));
+				cargarCombosComboBox();
+				JOptionPane.showMessageDialog(null, "Combo Creado Exitosamente");
+				CargarComponentes(modelCombos,null);
+				}
 			}
 			
 			}
@@ -230,8 +168,50 @@ public class Combos extends JDialog {
 				
 				
 		
-		btnCrearCombo.setBounds(372, 238, 104, 23);
+		btnCrearCombo.setBounds(374, 164, 125, 23);
 		contentPanel.add(btnCrearCombo);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 58, 362, 199);
+		contentPanel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		
+		
+		JScrollPane scrollPaneComponentes = new JScrollPane();
+		scrollPaneComponentes.setBounds(10, 11, 342, 174);
+		panel_1.add(scrollPaneComponentes);
+		
+		tableComponentes = new JTable();
+		modelComponentes=new DefaultTableModel();
+		String[] columnNames1 = {"Tipo","Codigo","Marca", "Modelo", "P.Venta"};
+		modelComponentes.setColumnIdentifiers(columnNames1);
+		tableComponentes.setModel(modelComponentes);
+		scrollPaneComponentes.setViewportView(tableComponentes);
+		CargarComponentes(modelComponentes,Tienda.getInstance().getMisComponentes());
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(503, 58, 362, 199);
+		contentPanel.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JScrollPane scrollComboNew = new JScrollPane();
+		scrollComboNew.setBounds(10, 11, 342, 174);
+		panel_2.add(scrollComboNew);
+		
+		tableComboNew = new JTable();
+		modelCombos=new DefaultTableModel();
+		String[] columnNames2 = {"Tipo","Codigo","Marca", "Modelo", "P.Venta"};
+		modelCombos.setColumnIdentifiers(columnNames2);
+		tableComboNew.setModel(modelCombos);
+		scrollComboNew.setViewportView(tableComboNew);
+		
+		
+		
+		
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -242,7 +222,7 @@ public class Combos extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					if(cbxCombos.getSelectedIndex()>0) {
 						
-						//CrearFactura factura=new CrearFactura(Tienda.getInstance().getMisCombos().get(cbxCombos.getSelectedIndex()-1));
+					
 					}
 				}
 			});
@@ -265,69 +245,47 @@ public class Combos extends JDialog {
 			}
 		}
 		
-		CargarMisComponentes();
+		
 		
 	}
 	
 	
 	
-	
-	
-	
-private void CargarMisComponentes() {
+	private void cargarCombosComboBox(){
+		cbxCombos.removeAllItems();
 		
-		modelTodo.setRowCount(0);
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-		tableComponentes.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
-	
-		fila = new Object[modelTodo.getColumnCount()];
-		for(int i=0;i<Tienda.getInstance().getMisComponentes().size() ;i++){
-			fila[0]=  Tienda.getInstance().getMisComponentes().get(i).getCodigo();
-			fila[1] = Tienda.getInstance().getMisComponentes().get(i).getNombre();
-			fila[2] = Tienda.getInstance().getMisComponentes().get(i).getMarca() +" " 
-					 +Tienda.getInstance().getMisComponentes().get(i).getModelo();	
-			fila[3] = Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta();
-			modelTodo.addRow(fila);	
-	}}
-	
-	
-	
-	
-private void CargarPreCombo() {
-	
-	modelTodo.setRowCount(0);
-	DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-	tableCombosPorCrear.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
-	
-	fila=new Object[modelCombo.getColumnCount()];
-	
-	for(int i=0;i<miscombos.size() ;i++){
-		fila[0]=  miscombos.get(i).getCodigo();
-		fila[1] = miscombos.get(i).getNombre();
-		fila[2] = miscombos.get(i).getMarca() +" " 
-				 +miscombos.get(i).getModelo();	
-		fila[3] = miscombos.get(i).getPrecioVenta();
-		modelCombo.addRow(fila);
-	
-	
-	
-}}	
-	
-private void CargarCombosCreados(int num) {
-	
-	modelComboCreado.setRowCount(0);
-	fila= new Object[modelComboCreado.getColumnCount()];
-	for(int i=0;i<Tienda.getInstance().getMisCombos().get(num).getMiCombo().size();i++) {
-		fila[0]=Tienda.getInstance().getMisCombos().get(num).getMiCombo().get(i).getCodigo();
-		fila[1]=Tienda.getInstance().getMisCombos().get(num).getMiCombo().get(i).getNombre();
-		fila[2]=Tienda.getInstance().getMisCombos().get(num).getMiCombo().get(i).getMarca()+""
-		+Tienda.getInstance().getMisCombos().get(num).getMiCombo().get(i).getModelo();
-		modelComboCreado.addRow(fila);;
+		
+		for (int i = 0; i < Tienda.getInstance().getMisCombos().size(); i++) {
+			cbxCombos.addItem(Tienda.getInstance().getMisCombos().get(i).getNombre() );	
+		}
+		
 	}
 	
 	
-	
-}	
+private void CargarComponentes(DefaultTableModel model,ArrayList<Componente> c) {
+		if(c==null){
+			System.out.println(c);
+			model.setRowCount(0);
+		}else{
+			System.out.println("entra a cargar el array");
+			System.out.println(c);
+			model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for(int i=0;i<c.size() ;i++){
+			fila[0] =  Tienda.getInstance().tipoDeComponente(c.get(i) );
+			fila[1]=  c.get(i).getCodigo();
+			fila[2] = c.get(i).getMarca();
+			fila[3] = c.get(i).getModelo();	
+			fila[4] = c.get(i).getPrecioVenta();
+			model.addRow(fila);	
+		}
+		}
+
+}
+
+
+
+
+
+
 }

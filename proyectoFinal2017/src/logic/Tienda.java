@@ -29,17 +29,27 @@ public class Tienda implements Serializable{
 	}
 
 	
-	public ArrayList<Componente> getComboComponentes(String nombre){
+	public ArrayList<Componente> getComboComponentes(int indice){
 		ArrayList<Componente> c= null;
+		if(misCombos.isEmpty()){
+			return null;
+		}
+		c=misCombos.get(indice).getMiCombo();
+				
+			
+		
+		
+		return c;
+	}
+	public boolean existeCombo(String c){
 		
 		for (int i = 0; i < misCombos.size(); i++) {
-			if (Tienda.getInstance().misCombos.get(i).getNombre().equalsIgnoreCase(nombre)){
-				c=misCombos.get(i).getMiCombo();
-				
+			if(misCombos.get(i).getNombre().equalsIgnoreCase(c)){
+				return true;
 			}
 		}
 		
-		return c;
+		return false;
 	}
 	
 	public ArrayList<Cliente> getMisClientes() {
@@ -157,8 +167,29 @@ public class Tienda implements Serializable{
 	}	
 	public void AgregarFactura(Factura factura) {
 		misFacturas.add(factura);
+		actualizarInventario(factura.getMisComponentes());
+		
 		guardar();
 	}	
+	
+	private void actualizarInventario(ArrayList<Componente> componentes){
+		
+		for (int i = 0; i < componentes.size(); i++) {
+			for (int j = 0; j < misComponentes.size(); j++) {
+				if(misComponentes.get(j).getCodigo().equalsIgnoreCase( componentes.get(i).getCodigo() )){
+					int cantidad=misComponentes.get(j).getCantidad();
+					cantidad= cantidad-componentes.get(i).getCantidad();
+					misComponentes.get(j).setCantidad(cantidad);
+					
+				}
+			}
+			
+		}
+		
+		
+		
+	}
+	
 	public void AgregarCombo(Combo combo) {
 		misCombos.add(combo);
 		guardar();
@@ -270,14 +301,28 @@ public class Tienda implements Serializable{
 		return componentes;
 	}
 	
-	public Componente BuescarCodigoComponente(String cod) {
+	public ArrayList<Componente> eliminarCantidadArticulo(ArrayList<Componente> listaComponentes,String cod,int Cantidad){
+		ArrayList<Componente> listaDevuelta =listaComponentes;
+		for (int i = 0; i <listaComponentes.size(); i++) {
+			if(listaComponentes.get(i).getCodigo().equalsIgnoreCase(cod)){
+				
+				listaComponentes.get(i).setCantidad(listaComponentes.get(i).getCantidad() - Cantidad );
+			}
+			
+		}
+		
+		return listaDevuelta;
+	}
+	
+	public Componente BuscarCodigoComponente(ArrayList<Componente> listaComponentes,String cod) {
 		Componente com=null;
-		for (Componente aux : misComponentes) {
+		for (Componente aux : listaComponentes) {
 			if(aux.getCodigo().equalsIgnoreCase(cod)) {
 				com=aux;
 			}
 			
 		}
+		
 		return com;
 	}
 	public boolean existeComponente(String cod){
@@ -312,6 +357,15 @@ public class Tienda implements Serializable{
 		
 	}
 	
+	public void addArrayComponentesAOtroArray(ArrayList<Componente> origen,ArrayList<Componente> destino){
+		
+		for (int i = 0; i < origen.size(); i++) {
+			destino.add(origen.get(i));
+		}
+		
+	}
+	
+	
 	public boolean VerificarCantidadMinima(Componente com) {
 		boolean veri=false;
 		if(com.getCantidad()<=5) {
@@ -320,5 +374,46 @@ public class Tienda implements Serializable{
 		return veri;
 	}
 	
+	public float precioTotalCantidad(Componente c) {
+		
+		float total= c.getPrecioVenta() * c.getCantidad();
+		
+		return total;
+	}
+	
+	public boolean siExisteDisponibilidadSegunCantidadAComprar(ArrayList<Componente> listacomp,String c, int cantidad){
+		
+		for (int i = 0; i < listacomp.size(); i++) {
+			if(listacomp.get(i).getCodigo().equalsIgnoreCase(c)){
+				if(listacomp.get(i).getCantidad() >= cantidad){
+					return true;
+					
+				}
+				
+			}
+			
+		}
+		
+		return false;
+		
+	}
+	
+	public boolean existeArticuloEnArreglo(ArrayList<Componente> lista,String codigo ){
+		
+		for (int i = 0; i < lista.size(); i++) {
+			if(lista.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				return false;
+			}
+			
+			
+		}
+		return true;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
-

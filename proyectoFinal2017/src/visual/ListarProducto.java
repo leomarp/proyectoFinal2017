@@ -15,9 +15,10 @@ import javax.swing.table.DefaultTableModel;
 import logic.Tienda;
 
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class ListarProducto extends JDialog {
+public class ListarProducto extends JDialog implements Serializable{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -26,22 +27,6 @@ public class ListarProducto extends JDialog {
 	private static Object[] fila;
 	
 
-	/*
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		try {
-			ListaCuenta dialog = new ListaCuenta();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListarProducto() {
 		
 		 
@@ -64,12 +49,12 @@ public class ListarProducto extends JDialog {
 				table.setEnabled(false);
 				scrollPane.setViewportView(table);
 				model = new DefaultTableModel();
-				String[] columnNames = {"Codigo","Marca", "modelo", "Numero de serie","cantidad","Prec. Compre","Prec. Venta"};
+				String[] columnNames = {"Tipo","Codigo","Marca", "Modelo", "Numero de serie","Cantidad","Precio Compra","Precio Venta"};
 				model.setColumnIdentifiers(columnNames);
 				table_1 = new JTable();									
 				table_1.setEnabled(false);
 				table_1.setModel(model);
-				loadVehiculo() ; 
+				loadProductos(); 
 				scrollPane.setViewportView(table_1);
 			}
 		}
@@ -96,17 +81,20 @@ public class ListarProducto extends JDialog {
 		}
 	}
 
-	private void loadVehiculo() {
+	private void loadProductos() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i<Tienda .getInstance().getMisComponentes().size();i++) {
-			fila[0] =  Tienda.getInstance().getMisComponentes().get(i).getCodigo();
-			fila[1] =  Tienda.getInstance().getMisComponentes().get(i).getMarca();
-			fila[2] =  Tienda.getInstance().getMisComponentes().get(i).getModelo();
-			fila[3] =  Tienda.getInstance().getMisComponentes().get(i).getNumeroSerie();
-			fila[4] =  Tienda.getInstance().getMisComponentes().get(i).getCantidad();			
-			fila[5] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioCompra();
-			fila[6] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta();
+			
+			fila[0] =  Tienda.getInstance().tipoDeComponente(Tienda.getInstance().getMisComponentes().get(i) );
+			
+			fila[1] =  Tienda.getInstance().getMisComponentes().get(i).getCodigo();
+			fila[2] =  Tienda.getInstance().getMisComponentes().get(i).getMarca();
+			fila[3] =  Tienda.getInstance().getMisComponentes().get(i).getModelo();
+			fila[4] =  Tienda.getInstance().getMisComponentes().get(i).getNumeroSerie();
+			fila[5] =  Tienda.getInstance().getMisComponentes().get(i).getCantidad();			
+			fila[6] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioCompra();
+			fila[7] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta();
 			model.addRow(fila);
 		}
 	}

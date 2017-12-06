@@ -1,6 +1,8 @@
 package logic;
 
-public class TarjetaMadre extends Componente {
+import java.io.Serializable;
+
+public class TarjetaMadre extends Componente implements Serializable{
 
 	private String tipoSocket;
 	private String tipoRam;

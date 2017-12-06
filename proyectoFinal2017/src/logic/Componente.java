@@ -1,6 +1,8 @@
 package logic;
 
-public class Componente {
+import java.io.Serializable;
+
+public class Componente implements Serializable{
 	protected String marca;
 	protected String modelo;
 	protected String codigo;

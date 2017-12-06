@@ -16,30 +16,13 @@ import org.jfree.data.general.DefaultPieDataset;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Grafica extends JDialog {
+public class Grafica extends JDialog implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-
-	/**
-	 * Launch the application.
-	 
-	public static void main(String[] args) {
-		try {
-			Grafica dialog = new Grafica();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	
 	public Grafica() {
 		setBounds(100, 100, 714, 458);
@@ -51,7 +34,7 @@ public class Grafica extends JDialog {
 		//Aqui se le ponen los valores
 				// Fuente de Datos
 		        DefaultPieDataset data1 = new DefaultPieDataset();
-		        data1.setValue("Disco Duro", 30);
+		        data1.setValue("Disco Duro", 50);
 		        data1.setValue("Tarjeta Madre", 30);
 		        data1.setValue("Ram", 25);
 		        data1.setValue("Micro", 15);

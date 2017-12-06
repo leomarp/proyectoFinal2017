@@ -15,32 +15,38 @@ import logic.Tienda;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Toolkit;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dim;
 	private JButton btnVender;
 	private JButton btnCombo;
 	
 
-	/**
-	 /// Launch the application.
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
 					
 					Principal frame = new Principal();
 					frame.setLocationRelativeTo(null);
+					
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -50,10 +56,9 @@ public class Principal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */ 
+
 	public Principal() {
+		setTitle("PC Parts");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Fotos/if_computer__desktop__electronic__pc__monitor__screen__technology_2317975.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,6 +66,8 @@ public class Principal extends JFrame {
 		super.setSize(dim.width-0, dim.height-40);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		
 		
 		JMenu mnCliente = new JMenu("Clientes");
 		menuBar.add(mnCliente);
@@ -75,6 +82,18 @@ public class Principal extends JFrame {
 			}
 		});
 		mnCliente.add(mntmListarClientes);
+		
+		JMenuItem mntmRegistrarCliente = new JMenuItem("Registrar Cliente");
+		mntmRegistrarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RegistrarCliente list = new RegistrarCliente();
+				list.setModal(true);
+				list.setLocationRelativeTo(null);
+				list.setVisible(true);
+			
+			}
+		});
+		mnCliente.add(mntmRegistrarCliente);
 		
 		JMenu mnNewMenu = new JMenu("Productos");
 		menuBar.add(mnNewMenu);
@@ -213,8 +232,13 @@ public class Principal extends JFrame {
 		contentPane.add(btnGrafica);
 		
 		JLabel label = new JLabel("");
-		label.setBounds(10, 0, 1574, 790);
+		label.setBounds(0, 0, 1584, 800);
 		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));
 		contentPane.add(label);
+		if(!Tienda.getInstance().abrirDatos()){
+			
+			JOptionPane.showMessageDialog(null, "Error al cargar los datos. Verifique archivo de datos.");
+		}
+		
 	}
 }

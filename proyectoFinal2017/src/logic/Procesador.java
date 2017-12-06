@@ -1,6 +1,8 @@
 package logic;
 
-public class Procesador extends Componente {
+import java.io.Serializable;
+
+public class Procesador extends Componente implements Serializable{
 
 	private String tipoSocket;
 	private String velocidad;

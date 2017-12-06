@@ -1,12 +1,14 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Factura {
+public class Factura implements Serializable{
 	
 	private String codigo;
 	private float precioVenta;
+	private float descuentoAplicado;
 	private Date fecha;
 	private Cliente cliente;
 	private ArrayList<Componente>misComponentes;
@@ -65,6 +67,17 @@ public class Factura {
 
 	public void setMisComponentes(ArrayList<Componente> misComponentes) {
 		this.misComponentes = misComponentes;
+	}
+
+	
+
+	public float getDescuentoAplicado() {
+		return descuentoAplicado;
+	}
+
+
+	public void setDescuentoAplicado(float descuentoAplicado) {
+		this.descuentoAplicado = descuentoAplicado;
 	}	
 	
 

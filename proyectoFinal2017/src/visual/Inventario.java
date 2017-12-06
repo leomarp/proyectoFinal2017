@@ -28,12 +28,13 @@ import logic.Tienda;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Inventario extends JDialog {
+public class Inventario extends JDialog implements Serializable {
 	
 
 	/**
@@ -48,22 +49,6 @@ public class Inventario extends JDialog {
 	private JComboBox cbxTipo ;
 	
 
-	/*
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		try {
-			ListaCuenta dialog = new ListaCuenta();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
 	public Inventario() {
 		
 		 
@@ -71,7 +56,7 @@ public class Inventario extends JDialog {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setModal(true);
-		setBounds(100, 100, 642, 417);
+		setBounds(100, 100, 642, 428);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,25 +64,27 @@ public class Inventario extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 34, 614, 304);
+			scrollPane.setBounds(10, 34, 614, 310);
 			contentPanel.add(scrollPane);
-			{
+			
 				table = new JTable();
-				table.setEnabled(false);
-				scrollPane.setViewportView(table);
 				model = new DefaultTableModel();
-				String[] columnNames = {"Codigo","Marca", "Modelo", "P.Compra", "P.Venta","Cantidad"};
+				
+				
+				String[] columnNames = {"Tipo","Codigo","Marca", "Modelo", "P.Compra", "P.Venta","Cantidad"};
 				model.setColumnIdentifiers(columnNames);
-				table_1 = new JTable();									
-				table_1.setEnabled(false);
-				table_1.setModel(model);
+				table.setModel(model);
+				
+				table.getColumnModel().getColumn(0).setPreferredWidth(100);
+				table.getColumnModel().getColumn(0).setMinWidth(100);
+				table.getColumnModel().getColumn(0).setMaxWidth(100);
 				loadInventario() ; 
-				scrollPane.setViewportView(table_1);
-			}
+				scrollPane.setViewportView(table);
+			
 		}
 		
 		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(396, 9, 46, 21);
+		lblTipo.setBounds(10, 9, 58, 21);
 		contentPanel.add(lblTipo);
 		
 		cbxTipo = new JComboBox();
@@ -110,7 +97,7 @@ public class Inventario extends JDialog {
 			
 		});
 		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Disco Duro", "Mamoria Ram", "Microprecesador", "Tarjeta Madre"}));
-		cbxTipo.setBounds(452, 9, 91, 21);
+		cbxTipo.setBounds(66, 9, 131, 21);
 		contentPanel.add(cbxTipo);
 		{
 			JLabel label = new JLabel("");
@@ -139,51 +126,37 @@ public class Inventario extends JDialog {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
 		for (int i = 0; i< Tienda.getInstance().getMisComponentes().size();i++) {
-			fila[0] =  Tienda.getInstance().getMisComponentes().get(i).getCodigo();
-			fila[1] =  Tienda.getInstance().getMisComponentes().get(i).getMarca();
-			fila[2] =  Tienda.getInstance().getMisComponentes().get(i).getModelo();
-			fila[3] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioCompra();
-			fila[4] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta();
-			fila[5] =  Tienda.getInstance().getMisComponentes().get(i).getCantidad();
+			fila[0] =  Tienda.getInstance().tipoDeComponente(Tienda.getInstance().getMisComponentes().get(i) );
+			fila[1] =  Tienda.getInstance().getMisComponentes().get(i).getCodigo();
+			fila[2] =  Tienda.getInstance().getMisComponentes().get(i).getMarca();
+			fila[3] =  Tienda.getInstance().getMisComponentes().get(i).getModelo();
+			fila[4] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioCompra();
+			fila[5] =  Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta();
+			fila[6] =  Tienda.getInstance().getMisComponentes().get(i).getCantidad();
 			
 			model.addRow(fila);
 		}
 	}
 	private void loadTipo(int num) {
 		model.setRowCount(0);
-		/*DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
-		tcr.setHorizontalAlignment(SwingConstants.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(tcr);
-		table.getColumnModel().getColumn(1).setCellRenderer(tcr);
-		table.getColumnModel().getColumn(2).setCellRenderer(tcr);*/
+		
 		fila = new Object[model.getColumnCount()];
 switch (num) {
 case 0:
-	for (Componente comp : Tienda.getInstance().getMisComponentes()) {
-
-		if(comp instanceof DiscoDuro){
-		fila[0] =  comp.getCodigo();
-		fila[1] =  comp.getMarca();
-		fila[2] =  comp.getModelo();
-		fila[3] =  comp.getPrecioCompra();
-		fila[4] =  comp.getPrecioVenta();
-		fila[5] =  comp.getCantidad();
-		
-		model.addRow(fila);
-		}
-	}
+	loadInventario() ;
 	
 	break;
 case 1:
 	for (Componente comp : Tienda.getInstance().getMisComponentes()) {
 
 		if(comp instanceof DiscoDuro){
-		fila[0] =  comp.getCodigo();
-		fila[1] =  comp.getMarca();
-		fila[2] =  comp.getModelo();
-		fila[3] =  comp.getPrecioCompra();
-		fila[4] =  comp.getPrecioVenta();
-		fila[5] =  comp.getCantidad();
+			fila[0] =  Tienda.getInstance().tipoDeComponente(comp);
+			fila[1] =  comp.getCodigo();
+			fila[2] =  comp.getMarca();
+			fila[3] =  comp.getModelo();
+			fila[4] =  comp.getPrecioCompra();
+			fila[5] =  comp.getPrecioVenta();
+			fila[6] =  comp.getCantidad();
 		
 		model.addRow(fila);
 		}
@@ -193,12 +166,13 @@ case 2:
 	for (Componente comp : Tienda.getInstance().getMisComponentes()) {
 
 		if(comp instanceof MemoriaRam){
-		fila[0] =  comp.getCodigo();
-		fila[1] =  comp.getMarca();
-		fila[2] =  comp.getModelo();
-		fila[3] =  comp.getPrecioCompra();
-		fila[4] =  comp.getPrecioVenta();
-		fila[5] =  comp.getCantidad();
+			fila[0] =  Tienda.getInstance().tipoDeComponente(comp);
+			fila[1] =  comp.getCodigo();
+			fila[2] =  comp.getMarca();
+			fila[3] =  comp.getModelo();
+			fila[4] =  comp.getPrecioCompra();
+			fila[5] =  comp.getPrecioVenta();
+			fila[6] =  comp.getCantidad();
 		
 		model.addRow(fila);
 		}
@@ -208,12 +182,13 @@ case 3:
 	for (Componente comp : Tienda.getInstance().getMisComponentes()) {
 
 		if(comp instanceof Procesador){
-		fila[0] =  comp.getCodigo();
-		fila[1] =  comp.getMarca();
-		fila[2] =  comp.getModelo();
-		fila[3] =  comp.getPrecioCompra();
-		fila[4] =  comp.getPrecioVenta();
-		fila[5] =  comp.getCantidad();
+			fila[0] =  Tienda.getInstance().tipoDeComponente(comp);
+			fila[1] =  comp.getCodigo();
+			fila[2] =  comp.getMarca();
+			fila[3] =  comp.getModelo();
+			fila[4] =  comp.getPrecioCompra();
+			fila[5] =  comp.getPrecioVenta();
+			fila[6] =  comp.getCantidad();
 		
 		model.addRow(fila);
 		}
@@ -223,12 +198,13 @@ case 4:
 	for (Componente comp : Tienda.getInstance().getMisComponentes()) {
 
 		if(comp instanceof TarjetaMadre){
-		fila[0] =  comp.getCodigo();
-		fila[1] =  comp.getMarca();
-		fila[2] =  comp.getModelo();
-		fila[3] =  comp.getPrecioCompra();
-		fila[4] =  comp.getPrecioVenta();
-		fila[5] =  comp.getCantidad();
+			fila[0] =  Tienda.getInstance().tipoDeComponente(comp);
+			fila[1] =  comp.getCodigo();
+			fila[2] =  comp.getMarca();
+			fila[3] =  comp.getModelo();
+			fila[4] =  comp.getPrecioCompra();
+			fila[5] =  comp.getPrecioVenta();
+			fila[6] =  comp.getCantidad();
 		
 		model.addRow(fila);
 		}
@@ -238,5 +214,6 @@ case 4:
 default:
 	break;
 }
-	}	
-}
+	}
+	
+}	

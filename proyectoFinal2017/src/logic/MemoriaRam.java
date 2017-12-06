@@ -1,7 +1,8 @@
 package logic;
 
+import java.io.Serializable;
 
-public class MemoriaRam extends Componente {
+public class MemoriaRam extends Componente implements Serializable{
 
 	private String capacidad;
 	private String velocidad;

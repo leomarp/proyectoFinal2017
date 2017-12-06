@@ -1,7 +1,8 @@
 package logic;
 
+import java.io.Serializable;
 
-public class Cliente {
+public class Cliente implements Serializable{
 		
 	private String nombre;
 	private String apellido;

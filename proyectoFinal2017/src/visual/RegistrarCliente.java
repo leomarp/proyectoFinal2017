@@ -9,6 +9,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -21,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class RegistrarCliente extends JDialog {
+public class RegistrarCliente extends JDialog implements Serializable{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombre;
@@ -32,26 +33,11 @@ public class RegistrarCliente extends JDialog {
 	private JTextField txtCorreo;
 	private MaskFormatter cedu;
 	private MaskFormatter tele;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarCliente dialog = new RegistrarCliente();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
-	/**
-	 * Create the dialog.
-	 */
 	public RegistrarCliente() {
 		setTitle("Registrar cliente");
 		setResizable(false);
-		setBounds(100, 100, 382, 300);
+		setBounds(100, 100, 456, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -67,7 +53,7 @@ public class RegistrarCliente extends JDialog {
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(66, 37, 105, 20);
+			txtNombre.setBounds(66, 37, 140, 20);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
@@ -86,27 +72,27 @@ public class RegistrarCliente extends JDialog {
 			
 			
 			txtCedula = new  JFormattedTextField(cedu);;
-			txtCedula.setBounds(66, 81, 105, 20);
+			txtCedula.setBounds(66, 81, 140, 20);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
 			JLabel lblApellido = new JLabel("Apellido:");
-			lblApellido.setBounds(174, 37, 65, 21);
+			lblApellido.setBounds(227, 37, 65, 21);
 			panel.add(lblApellido);
 			
 			txtApellido = new JTextField();
-			txtApellido.setBounds(230, 37, 100, 20);
+			txtApellido.setBounds(295, 37, 140, 20);
 			panel.add(txtApellido);
 			txtApellido.setColumns(10);
 			
 					
 			
 			JLabel lblTelefono = new JLabel("Telefono:");
-			lblTelefono.setBounds(174, 81, 65, 21);
+			lblTelefono.setBounds(227, 81, 65, 21);
 			panel.add(lblTelefono);
 			
 			txtTelefono = new JFormattedTextField(tele);
-			txtTelefono.setBounds(230, 81, 100, 20);
+			txtTelefono.setBounds(295, 81, 140, 20);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
 			
@@ -115,7 +101,7 @@ public class RegistrarCliente extends JDialog {
 			panel.add(lblDireccion);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(66, 129, 264, 20);
+			txtDireccion.setBounds(74, 129, 361, 20);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
@@ -124,7 +110,7 @@ public class RegistrarCliente extends JDialog {
 			panel.add(lblCorreo);
 			
 			txtCorreo = new JTextField();
-			txtCorreo.setBounds(66, 173, 264, 20);
+			txtCorreo.setBounds(66, 173, 369, 20);
 			panel.add(txtCorreo);
 			txtCorreo.setColumns(10);
 		}

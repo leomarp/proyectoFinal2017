@@ -17,9 +17,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 
-public class OrdenesCompra extends JDialog {
+public class OrdenesCompra extends JDialog implements Serializable{
 
 	private final JPanel contentPanel = new JPanel();
 	
@@ -30,7 +31,7 @@ public class OrdenesCompra extends JDialog {
 	
 	public OrdenesCompra() {
 		
-		setBounds(100, 100, 807, 469);
+		setBounds(100, 100, 807, 485);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,12 +40,12 @@ public class OrdenesCompra extends JDialog {
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Orden de compra", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
-			panel.setBounds(10, 22, 771, 375);
+			panel.setBounds(10, 11, 771, 386);
 			contentPanel.add(panel);
 			panel.setLayout(null);
 			
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 41, 751, 323);
+			scrollPane.setBounds(10, 30, 751, 345);
 			panel.add(scrollPane);
 			
 			String[] columnsHeaders = {"Codigo", "Marca", "Modelo", "Cant. Disponible"};

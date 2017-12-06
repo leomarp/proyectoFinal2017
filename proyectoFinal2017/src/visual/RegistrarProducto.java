@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
@@ -28,7 +29,7 @@ import javax.swing.SpinnerNumberModel;
 import java.awt.Color;
 import java.awt.Font;
 
-public class RegistrarProducto extends JDialog {
+public class RegistrarProducto extends JDialog implements Serializable{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtMarca;
@@ -54,30 +55,108 @@ public class RegistrarProducto extends JDialog {
     private JComboBox cbxTipoRamTarjetaMadre;
     private JComboBox cbxTipodeProducto;
     private JSpinner spnCantidad;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			RegistrarProducto dialog = new RegistrarProducto();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
+	
 	public RegistrarProducto() {
 		setTitle("Registrar productos");
 		setResizable(false);
-		setBounds(100, 100, 488, 440);
+		setBounds(100, 100, 488, 462);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new TitledBorder(null, "Datos del Producto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		         
+		          panelMemoriaRam = new JPanel();
+		          panelMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		          panelMemoriaRam.setBounds(10, 224, 462, 143);
+		          contentPanel.add(panelMemoriaRam);
+		          panelMemoriaRam.setLayout(null);
+		          panelMemoriaRam.setVisible(false);
+		          
+		          JLabel lblCantidad_1 = new JLabel("Capacidad:");
+		          lblCantidad_1.setBounds(10, 31, 67, 14);
+		          panelMemoriaRam.add(lblCantidad_1);
+		          
+		           cbxCapacidadRam = new JComboBox();
+		           cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "1GB", "2GB", "4GB", "8GB", "16GB"}));
+		           cbxCapacidadRam.setBounds(111, 28, 77, 20);
+		           panelMemoriaRam.add(cbxCapacidadRam);
+		           
+		           JLabel lblVelocidad_1 = new JLabel("Velocidad(MHZ):");
+		           lblVelocidad_1.setBounds(10, 71, 99, 14);
+		           panelMemoriaRam.add(lblVelocidad_1);
+		           
+		           cbxVelocidadRam = new JComboBox();
+		           cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
+		           cbxVelocidadRam.setBounds(111, 68, 77, 20);
+		           panelMemoriaRam.add(cbxVelocidadRam);
+		           
+		           JLabel lblTipo = new JLabel("Tipo:");
+		           lblTipo.setBounds(10, 107, 46, 14);
+		           panelMemoriaRam.add(lblTipo);
+		           
+		            cbxTipoRam = new JComboBox();
+		            cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"", "DDR", "DDR2", "DDR3"}));
+		            cbxTipoRam.setBounds(111, 104, 77, 20);
+		            panelMemoriaRam.add(cbxTipoRam);
+		        
+		         panelDiscoDuro = new JPanel();
+		         panelDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		         panelDiscoDuro.setBounds(10, 224, 462, 143);
+		         contentPanel.add(panelDiscoDuro);
+		         panelDiscoDuro.setLayout(null);
+		         panelDiscoDuro.setVisible(false);
+		         
+		         JLabel lblCapacidad = new JLabel("Capacidad:");
+		         lblCapacidad.setBounds(10, 28, 69, 14);
+		         panelDiscoDuro.add(lblCapacidad);
+		         
+		          cbxCapacidadDiscoDuro = new JComboBox();
+		          cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
+		          cbxCapacidadDiscoDuro.setBounds(126, 25, 86, 20);
+		          panelDiscoDuro.add(cbxCapacidadDiscoDuro);
+		          
+		          JLabel lblTipoDeConexion = new JLabel("Tipo de Conexion:");
+		          lblTipoDeConexion.setBounds(10, 65, 109, 14);
+		          panelDiscoDuro.add(lblTipoDeConexion);
+		          
+		           cbxTipoConexionDiscoDuro = new JComboBox();
+		           cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "IDE", "SATA", "SCSI", "SAS"}));
+		           cbxTipoConexionDiscoDuro.setBounds(126, 62, 86, 20);
+		           panelDiscoDuro.add(cbxTipoConexionDiscoDuro);
+		           
+		           JLabel lblVelocidadrpm = new JLabel("Velocidad(RPM):");
+		           lblVelocidadrpm.setBounds(10, 105, 97, 14);
+		           panelDiscoDuro.add(lblVelocidadrpm);
+		           
+		            cbxVelocidadDiscoDuro = new JComboBox();
+		            cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "5,400 (RPM) ", "7,200 (RPM)"}));
+		            cbxVelocidadDiscoDuro.setBounds(126, 102, 86, 20);
+		            panelDiscoDuro.add(cbxVelocidadDiscoDuro);
+		       
+		        panelMicroprocesador = new JPanel();
+		        panelMicroprocesador.setBorder(new TitledBorder(null, "Microprocesador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		        panelMicroprocesador.setBounds(10, 224, 462, 143);
+		        contentPanel.add(panelMicroprocesador);
+		        panelMicroprocesador.setLayout(null);
+		        panelMicroprocesador.setVisible(false);
+		        
+		        JLabel lblTipoDeSoket_1 = new JLabel("Tipo de Socket:");
+		        lblTipoDeSoket_1.setBounds(10, 41, 98, 14);
+		        panelMicroprocesador.add(lblTipoDeSoket_1);
+		        
+		         cbxTipoSoketMicroProcesador = new JComboBox();
+		         cbxTipoSoketMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "Socket 423", "Socket 479", "Socket 754", "Socket A"}));
+		         cbxTipoSoketMicroProcesador.setBounds(100, 38, 98, 20);
+		         panelMicroprocesador.add(cbxTipoSoketMicroProcesador);
+		         
+		         JLabel lblVelocidad = new JLabel("Velocidad:");
+		         lblVelocidad.setBounds(10, 93, 80, 14);
+		         panelMicroprocesador.add(lblVelocidad);
+		         
+		          cbxVelocidadMicroProcesador = new JComboBox();
+		          cbxVelocidadMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "1.8GHZ", "2.4GHZ", "3.0GHZ"}));
+		          cbxVelocidadMicroProcesador.setBounds(100, 90, 98, 20);
+		          panelMicroprocesador.add(cbxVelocidadMicroProcesador);
 		       
 		       panelTarjetaMadre = new JPanel();
 		       panelTarjetaMadre.setBorder(new TitledBorder(null, "Tarjeta Madre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -112,106 +191,13 @@ public class RegistrarProducto extends JDialog {
 		         cbxTipoSoketTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"", "PGA", "BGA", "LGA"}));
 		         cbxTipoSoketTarjetaMadre.setBounds(129, 112, 103, 20);
 		         panelTarjetaMadre.add(cbxTipoSoketTarjetaMadre);
-		      
-		       panelMicroprocesador = new JPanel();
-		       panelMicroprocesador.setBorder(new TitledBorder(null, "Microprocesador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		       panelMicroprocesador.setBounds(10, 224, 462, 143);
-		       contentPanel.add(panelMicroprocesador);
-		       panelMicroprocesador.setLayout(null);
-		       panelMicroprocesador.setVisible(false);
-		       
-		       JLabel lblTipoDeSoket_1 = new JLabel("Tipo de Soket:");
-		       lblTipoDeSoket_1.setBounds(10, 41, 82, 14);
-		       panelMicroprocesador.add(lblTipoDeSoket_1);
-		       
-		        cbxTipoSoketMicroProcesador = new JComboBox();
-		        cbxTipoSoketMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "Socket 423", "Socket 479", "Socket 754", "Socket A"}));
-		        cbxTipoSoketMicroProcesador.setBounds(100, 38, 98, 20);
-		        panelMicroprocesador.add(cbxTipoSoketMicroProcesador);
-		        
-		        JLabel lblVelocidad = new JLabel("Velocidad:");
-		        lblVelocidad.setBounds(10, 93, 75, 14);
-		        panelMicroprocesador.add(lblVelocidad);
-		        
-		         cbxVelocidadMicroProcesador = new JComboBox();
-		         cbxVelocidadMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "1.8GHZ", "2.4GHZ", "3.0GHZ"}));
-		         cbxVelocidadMicroProcesador.setBounds(100, 90, 98, 20);
-		         panelMicroprocesador.add(cbxVelocidadMicroProcesador);
-		     
-		      panelDiscoDuro = new JPanel();
-		      panelDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		      panelDiscoDuro.setBounds(10, 224, 462, 143);
-		      contentPanel.add(panelDiscoDuro);
-		      panelDiscoDuro.setLayout(null);
-		      panelDiscoDuro.setVisible(false);
-		      
-		      JLabel lblCapacidad = new JLabel("Capacidad:");
-		      lblCapacidad.setBounds(10, 28, 69, 14);
-		      panelDiscoDuro.add(lblCapacidad);
-		      
-		       cbxCapacidadDiscoDuro = new JComboBox();
-		       cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
-		       cbxCapacidadDiscoDuro.setBounds(126, 25, 86, 20);
-		       panelDiscoDuro.add(cbxCapacidadDiscoDuro);
-		       
-		       JLabel lblTipoDeConexion = new JLabel("Tipo de Conexion:");
-		       lblTipoDeConexion.setBounds(10, 65, 109, 14);
-		       panelDiscoDuro.add(lblTipoDeConexion);
-		       
-		        cbxTipoConexionDiscoDuro = new JComboBox();
-		        cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "IDE", "SATA", "SCSI", "SAS"}));
-		        cbxTipoConexionDiscoDuro.setBounds(126, 62, 86, 20);
-		        panelDiscoDuro.add(cbxTipoConexionDiscoDuro);
-		        
-		        JLabel lblVelocidadrpm = new JLabel("Velocidad(RPM):");
-		        lblVelocidadrpm.setBounds(10, 105, 97, 14);
-		        panelDiscoDuro.add(lblVelocidadrpm);
-		        
-		         cbxVelocidadDiscoDuro = new JComboBox();
-		         cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "5,400 (RPM) ", "7,200 (RPM)"}));
-		         cbxVelocidadDiscoDuro.setBounds(126, 102, 86, 20);
-		         panelDiscoDuro.add(cbxVelocidadDiscoDuro);
-		    
-		     panelMemoriaRam = new JPanel();
-		     panelMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		     panelMemoriaRam.setBounds(10, 224, 462, 143);
-		     contentPanel.add(panelMemoriaRam);
-		     panelMemoriaRam.setLayout(null);
-		     panelMemoriaRam.setVisible(false);
-		     
-		     JLabel lblCantidad_1 = new JLabel("Capacidad:");
-		     lblCantidad_1.setBounds(10, 31, 67, 14);
-		     panelMemoriaRam.add(lblCantidad_1);
-		     
-		      cbxCapacidadRam = new JComboBox();
-		      cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "1GB", "2GB", "4GB", "8GB", "16GB"}));
-		     cbxCapacidadRam.setBounds(111, 28, 77, 20);
-		     panelMemoriaRam.add(cbxCapacidadRam);
-		     
-		     JLabel lblVelocidad_1 = new JLabel("Velocidad(MHZ):");
-		     lblVelocidad_1.setBounds(10, 71, 99, 14);
-		     panelMemoriaRam.add(lblVelocidad_1);
-		     
-		     cbxVelocidadRam = new JComboBox();
-		     cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
-		     cbxVelocidadRam.setBounds(111, 68, 77, 20);
-		     panelMemoriaRam.add(cbxVelocidadRam);
-		     
-		     JLabel lblTipo = new JLabel("Tipo:");
-		     lblTipo.setBounds(10, 107, 46, 14);
-		     panelMemoriaRam.add(lblTipo);
-		     
-		      cbxTipoRam = new JComboBox();
-		      cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"", "DDR", "DDR2", "DDR3"}));
-		     cbxTipoRam.setBounds(111, 104, 77, 20);
-		     panelMemoriaRam.add(cbxTipoRam);
 		
 		JLabel lblMarca = new JLabel("Marca:");
 		lblMarca.setBounds(11, 132, 46, 14);
 		contentPanel.add(lblMarca);
 		
 		txtMarca = new JTextField();
-		txtMarca.setBounds(67, 129, 86, 20);
+		txtMarca.setBounds(67, 129, 116, 20);
 		contentPanel.add(txtMarca);
 		txtMarca.setColumns(10);
 		
@@ -220,7 +206,7 @@ public class RegistrarProducto extends JDialog {
 		contentPanel.add(lblModelo);
 		
 		txtModelo = new JTextField();
-		txtModelo.setBounds(67, 80, 86, 20);
+		txtModelo.setBounds(67, 80, 116, 20);
 		contentPanel.add(txtModelo);
 		txtModelo.setColumns(10);
 		
@@ -229,7 +215,7 @@ public class RegistrarProducto extends JDialog {
 		contentPanel.add(lblCodigo);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(66, 33, 86, 20);
+		txtCodigo.setBounds(66, 33, 116, 20);
 		contentPanel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
@@ -238,7 +224,7 @@ public class RegistrarProducto extends JDialog {
 		contentPanel.add(lblNumeroDeSerie);
 		
 		txtNumerodeSerie = new JTextField();
-		txtNumerodeSerie.setBounds(326, 33, 86, 20);
+		txtNumerodeSerie.setBounds(326, 33, 126, 20);
 		contentPanel.add(txtNumerodeSerie);
 		txtNumerodeSerie.setColumns(10);
 		
@@ -248,7 +234,7 @@ public class RegistrarProducto extends JDialog {
 		
 		 spnCantidad = new JSpinner();
 		spnCantidad.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantidad.setBounds(67, 177, 86, 20);
+		spnCantidad.setBounds(67, 177, 116, 20);
 		contentPanel.add(spnCantidad);
 		
 		JLabel lblPrecioCompra = new JLabel("Precio Compra:");
@@ -256,7 +242,7 @@ public class RegistrarProducto extends JDialog {
 		contentPanel.add(lblPrecioCompra);
 		
 		txtPrecioCompra = new JTextField();
-		txtPrecioCompra.setBounds(326, 80, 86, 20);
+		txtPrecioCompra.setBounds(326, 80, 126, 20);
 		contentPanel.add(txtPrecioCompra);
 		txtPrecioCompra.setColumns(10);
 		
@@ -265,7 +251,7 @@ public class RegistrarProducto extends JDialog {
 		contentPanel.add(lblPrecioVenta);
 		
 		txtPrecioVenta = new JTextField();
-		txtPrecioVenta.setBounds(326, 129, 86, 20);
+		txtPrecioVenta.setBounds(326, 129, 126, 20);
 		contentPanel.add(txtPrecioVenta);
 		txtPrecioVenta.setColumns(10);
 		
@@ -321,7 +307,7 @@ public class RegistrarProducto extends JDialog {
 				
 			}
 		});
-		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"", "Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
+		cbxTipodeProducto.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta Madre", "Microprocesador", "Memoria Ram", "Disco Duro"}));
 		cbxTipodeProducto.setBounds(326, 177, 126, 20);
 		contentPanel.add(cbxTipodeProducto);
 		{
@@ -332,24 +318,14 @@ public class RegistrarProducto extends JDialog {
 				JButton okButton = new JButton("Registrar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						if(!txtMarca.getText().equalsIgnoreCase("") && !txtModelo.getText().equalsIgnoreCase("") && !txtPrecioCompra.getText().equalsIgnoreCase("") 
-								&& !txtPrecioVenta.getText().equalsIgnoreCase("") && !txtNumerodeSerie.getText().equalsIgnoreCase("") && cbxTipodeProducto.getSelectedIndex()!=0 ) {
-							if(cbxTipodeProducto.getSelectedItem().toString().equalsIgnoreCase("")) {
-								JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  
-							}
-							/*String marca = txtMarca.getText();
-							String modelo = txtModelo.getText();
-							float preciocompra = Float.parseFloat(txtPrecioCompra.getText().toString());
-							float precioventa = Float.parseFloat(txtPrecioVenta.getText().toString());
-							String numeroserie = txtNumerodeSerie.getText();
-							Integer cantidad = Integer.parseInt(spnCantidad.getValue().toString());*/ 
+						
+						
+						if(comprobarProductoAntesDeGuardar() ) {
 							
 							if(cbxTipodeProducto.getSelectedItem().toString().equalsIgnoreCase("Tarjeta Madre")) {
 								if(cbxTipoConexionTarjetaMadre.getSelectedIndex()!=0 && cbxTipoRamTarjetaMadre.getSelectedIndex()!=0 && cbxTipoSoketTarjetaMadre.getSelectedIndex()!=0) {
-									/*String tipoconexion = cbxTipoConexionTarjetaMadre.getSelectedItem().toString();
-									String tiporam = cbxTipoRamTarjetaMadre.getSelectedItem().toString();
-									String tiposocket = cbxTipoSoketTarjetaMadre.getSelectedItem().toString();*/
-									//Componente componente=new Componente();
+									
+									
 									TarjetaMadre tarjeta=new TarjetaMadre();
 									tarjeta.setCantidad(Integer.parseInt(spnCantidad.getValue().toString()));
 									tarjeta.setCodigo(txtCodigo.getText());
@@ -364,7 +340,7 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(tarjeta);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									//CleanTarjetaMadre();
+									
 									CleanCompleto();
 								}else { JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 								
@@ -438,7 +414,7 @@ public class RegistrarProducto extends JDialog {
 									
 									Tienda.getInstance().AgregarComponentes(memoria);
 									JOptionPane.showMessageDialog(null, "Datos Registrados",null, JOptionPane.INFORMATION_MESSAGE,null);
-									//CleanMemoriRam();
+									
 									CleanCompleto();
 								}else {JOptionPane.showMessageDialog(null, "Favor completar todos los parametros",null, JOptionPane.WARNING_MESSAGE,null);  }
 							}
@@ -477,6 +453,34 @@ public class RegistrarProducto extends JDialog {
 	
 	
 	
+	public boolean comprobarProductoAntesDeGuardar(){
+		String codigo=txtCodigo.getText();
+		int pcompra= Integer.parseInt( txtPrecioCompra.getText());
+		int pVenta=Integer.parseInt( txtPrecioVenta.getText());		
+		if(txtMarca.getText().equalsIgnoreCase("") && 
+				txtModelo.getText().equalsIgnoreCase("") && 
+				txtPrecioCompra.getText().equalsIgnoreCase("") && 
+				txtPrecioVenta.getText().equalsIgnoreCase("") && 
+				txtNumerodeSerie.getText().equalsIgnoreCase("") && 
+				
+				txtCodigo.getText().equalsIgnoreCase("")
+		){
+			System.out.println("esto esta jodiendo 1");
+			return false;
+		} 
+		if(Tienda.getInstance().existeComponente(codigo )){
+			System.out.println("esto esta jodiendo 2");
+			return false;
+			
+		}
+		
+		if(pVenta <= pcompra ){
+			System.out.println("esto esta jodiendo 3");
+			return false;
+		}
+		System.out.println("esto esta jodiendo 4");
+		return true;
+	}
 	
 	
 	public void CleanCompleto() {
