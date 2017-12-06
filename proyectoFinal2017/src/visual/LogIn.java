@@ -14,11 +14,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
-public class LogIn extends JDialog implements Serializable{
+public class LogIn extends JDialog {
 
 	/**
 	 * 
@@ -54,7 +53,7 @@ public class LogIn extends JDialog implements Serializable{
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		{
 			JLabel label = new JLabel("");
 			label.setIcon(new ImageIcon(LogIn.class.getResource("/Fotos/if_photo_370076.png")));
@@ -98,13 +97,24 @@ public class LogIn extends JDialog implements Serializable{
 						char[] clave= ptxtCont.getPassword();
 						String pass= new String(clave);
 						String admin="admin";
+						String vende="usuario1";
 						
 						if (usuario.equals(admin) && pass.equals(admin)) {
 							dispose();
 							JOptionPane.showMessageDialog(null, "Bienvenido al Sistema","Entrada",JOptionPane.INFORMATION_MESSAGE);
 							Principal p= new Principal();
+						
 							p.setVisible(true);
-							}else{
+							p.setLocationRelativeTo(null);
+							}else if (usuario.equals(vende) && pass.equals(admin)) {
+									dispose();
+									JOptionPane.showMessageDialog(null, "Bienvenido al Sistema","Entrada",JOptionPane.INFORMATION_MESSAGE);
+									Prin_Vendedor p= new Prin_Vendedor();									
+									p.setVisible(true);
+									p.setLocationRelativeTo(null);
+							}
+							
+							else{
 								JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta","Error",JOptionPane.ERROR_MESSAGE);
 								clean();
 							}
