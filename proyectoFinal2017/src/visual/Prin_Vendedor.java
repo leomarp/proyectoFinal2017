@@ -114,6 +114,20 @@ public class Prin_Vendedor extends JFrame implements Serializable{
 			}
 		});
 		mnCombos.add(mntmVerCombos);
+		
+		JMenu mnLogout = new JMenu("Salir");
+		menuBar.add(mnLogout);
+		
+		JMenuItem mntmLogout = new JMenuItem("Cerrar sesion");
+		mntmLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				LogIn l= new LogIn();
+				l.setLocationRelativeTo(null);
+				l.setVisible(true);
+			}
+		});
+		mnLogout.add(mntmLogout);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

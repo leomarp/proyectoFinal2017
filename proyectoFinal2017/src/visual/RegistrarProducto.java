@@ -77,8 +77,8 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		          panelMemoriaRam.add(lblCantidad_1);
 		          
 		           cbxCapacidadRam = new JComboBox();
-		           cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "1GB", "2GB", "4GB", "8GB", "16GB"}));
-		           cbxCapacidadRam.setBounds(111, 28, 77, 20);
+		           cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "1GB", "2GB", "4GB", "8GB", "16GB"}));
+		           cbxCapacidadRam.setBounds(111, 28, 99, 20);
 		           panelMemoriaRam.add(cbxCapacidadRam);
 		           
 		           JLabel lblVelocidad_1 = new JLabel("Velocidad(MHZ):");
@@ -86,8 +86,8 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		           panelMemoriaRam.add(lblVelocidad_1);
 		           
 		           cbxVelocidadRam = new JComboBox();
-		           cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
-		           cbxVelocidadRam.setBounds(111, 68, 77, 20);
+		           cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
+		           cbxVelocidadRam.setBounds(111, 68, 99, 20);
 		           panelMemoriaRam.add(cbxVelocidadRam);
 		           
 		           JLabel lblTipo = new JLabel("Tipo:");
@@ -95,8 +95,8 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		           panelMemoriaRam.add(lblTipo);
 		           
 		            cbxTipoRam = new JComboBox();
-		            cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"", "DDR", "DDR2", "DDR3"}));
-		            cbxTipoRam.setBounds(111, 104, 77, 20);
+		            cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
+		            cbxTipoRam.setBounds(111, 104, 99, 20);
 		            panelMemoriaRam.add(cbxTipoRam);
 		        
 		         panelDiscoDuro = new JPanel();
@@ -107,30 +107,30 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		         panelDiscoDuro.setVisible(false);
 		         
 		         JLabel lblCapacidad = new JLabel("Capacidad:");
-		         lblCapacidad.setBounds(10, 28, 69, 14);
+		         lblCapacidad.setBounds(10, 31, 69, 14);
 		         panelDiscoDuro.add(lblCapacidad);
 		         
 		          cbxCapacidadDiscoDuro = new JComboBox();
-		          cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
-		          cbxCapacidadDiscoDuro.setBounds(126, 25, 86, 20);
+		          cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
+		          cbxCapacidadDiscoDuro.setBounds(111, 28, 99, 20);
 		          panelDiscoDuro.add(cbxCapacidadDiscoDuro);
 		          
 		          JLabel lblTipoDeConexion = new JLabel("Tipo de Conexion:");
-		          lblTipoDeConexion.setBounds(10, 65, 109, 14);
+		          lblTipoDeConexion.setBounds(10, 71, 109, 14);
 		          panelDiscoDuro.add(lblTipoDeConexion);
 		          
 		           cbxTipoConexionDiscoDuro = new JComboBox();
-		           cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "IDE", "SATA", "SCSI", "SAS"}));
-		           cbxTipoConexionDiscoDuro.setBounds(126, 62, 86, 20);
+		           cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "IDE", "SATA", "SCSI", "SAS"}));
+		           cbxTipoConexionDiscoDuro.setBounds(111, 68, 99, 20);
 		           panelDiscoDuro.add(cbxTipoConexionDiscoDuro);
 		           
 		           JLabel lblVelocidadrpm = new JLabel("Velocidad(RPM):");
-		           lblVelocidadrpm.setBounds(10, 105, 97, 14);
+		           lblVelocidadrpm.setBounds(10, 107, 97, 14);
 		           panelDiscoDuro.add(lblVelocidadrpm);
 		           
 		            cbxVelocidadDiscoDuro = new JComboBox();
-		            cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"", "5,400 (RPM) ", "7,200 (RPM)"}));
-		            cbxVelocidadDiscoDuro.setBounds(126, 102, 86, 20);
+		            cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "5,400 (RPM) ", "7,200 (RPM)"}));
+		            cbxVelocidadDiscoDuro.setBounds(111, 104, 99, 20);
 		            panelDiscoDuro.add(cbxVelocidadDiscoDuro);
 		       
 		        panelMicroprocesador = new JPanel();
@@ -141,21 +141,21 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		        panelMicroprocesador.setVisible(false);
 		        
 		        JLabel lblTipoDeSoket_1 = new JLabel("Tipo de Socket:");
-		        lblTipoDeSoket_1.setBounds(10, 41, 98, 14);
+		        lblTipoDeSoket_1.setBounds(10, 31, 98, 14);
 		        panelMicroprocesador.add(lblTipoDeSoket_1);
 		        
 		         cbxTipoSoketMicroProcesador = new JComboBox();
-		         cbxTipoSoketMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "Socket 423", "Socket 479", "Socket 754", "Socket A"}));
-		         cbxTipoSoketMicroProcesador.setBounds(100, 38, 98, 20);
+		         cbxTipoSoketMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "Socket 423", "Socket 479", "Socket 754", "Socket A"}));
+		         cbxTipoSoketMicroProcesador.setBounds(111, 28, 99, 20);
 		         panelMicroprocesador.add(cbxTipoSoketMicroProcesador);
 		         
 		         JLabel lblVelocidad = new JLabel("Velocidad:");
-		         lblVelocidad.setBounds(10, 93, 80, 14);
+		         lblVelocidad.setBounds(10, 71, 80, 14);
 		         panelMicroprocesador.add(lblVelocidad);
 		         
 		          cbxVelocidadMicroProcesador = new JComboBox();
-		          cbxVelocidadMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"", "1.8GHZ", "2.4GHZ", "3.0GHZ"}));
-		          cbxVelocidadMicroProcesador.setBounds(100, 90, 98, 20);
+		          cbxVelocidadMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "1.8GHZ", "2.4GHZ", "3.0GHZ"}));
+		          cbxVelocidadMicroProcesador.setBounds(111, 68, 99, 20);
 		          panelMicroprocesador.add(cbxVelocidadMicroProcesador);
 		       
 		       panelTarjetaMadre = new JPanel();
@@ -166,30 +166,30 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		       panelTarjetaMadre.setVisible(true);
 		       
 		       JLabel lblTipoDeconector = new JLabel("Tipo de Conector:");
-		       lblTipoDeconector.setBounds(10, 33, 109, 14);
+		       lblTipoDeconector.setBounds(10, 31, 109, 14);
 		       panelTarjetaMadre.add(lblTipoDeconector);
 		       
 		        cbxTipoConexionTarjetaMadre = new JComboBox();
-		        cbxTipoConexionTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"", "AX", "AT", "ATX", "ITX", "BTX", "DTX"}));
-		        cbxTipoConexionTarjetaMadre.setBounds(129, 30, 103, 20);
+		        cbxTipoConexionTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "AX", "AT", "ATX", "ITX", "BTX", "DTX"}));
+		        cbxTipoConexionTarjetaMadre.setBounds(111, 28, 103, 20);
 		        panelTarjetaMadre.add(cbxTipoConexionTarjetaMadre);
 		        
 		        JLabel lblTipoDeRam = new JLabel("Tipo de Ram:");
-		        lblTipoDeRam.setBounds(10, 72, 81, 14);
+		        lblTipoDeRam.setBounds(10, 71, 81, 14);
 		        panelTarjetaMadre.add(lblTipoDeRam);
 		        
 		         cbxTipoRamTarjetaMadre = new JComboBox();
-		         cbxTipoRamTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"", "DDR", "DDR2", "DDR3"}));
-		         cbxTipoRamTarjetaMadre.setBounds(129, 69, 103, 20);
+		         cbxTipoRamTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
+		         cbxTipoRamTarjetaMadre.setBounds(111, 68, 103, 20);
 		         panelTarjetaMadre.add(cbxTipoRamTarjetaMadre);
 		         
 		         JLabel lblTipoDeSoket = new JLabel("Tipo de Soket:");
-		         lblTipoDeSoket.setBounds(10, 115, 81, 14);
+		         lblTipoDeSoket.setBounds(10, 107, 81, 14);
 		         panelTarjetaMadre.add(lblTipoDeSoket);
 		         
 		         cbxTipoSoketTarjetaMadre = new JComboBox();
-		         cbxTipoSoketTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"", "PGA", "BGA", "LGA"}));
-		         cbxTipoSoketTarjetaMadre.setBounds(129, 112, 103, 20);
+		         cbxTipoSoketTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "PGA", "BGA", "LGA"}));
+		         cbxTipoSoketTarjetaMadre.setBounds(111, 104, 103, 20);
 		         panelTarjetaMadre.add(cbxTipoSoketTarjetaMadre);
 		
 		JLabel lblMarca = new JLabel("Marca:");

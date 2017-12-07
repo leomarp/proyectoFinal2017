@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logic.Tienda;
+
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.awt.event.ActionEvent;
@@ -43,7 +45,7 @@ public class OrdenesCompra extends JDialog implements Serializable{
 			panel.setBounds(10, 11, 771, 386);
 			contentPanel.add(panel);
 			panel.setLayout(null);
-			
+			//-----------------------------------------------------------------------tabla
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(10, 30, 751, 345);
 			panel.add(scrollPane);
@@ -63,6 +65,12 @@ public class OrdenesCompra extends JDialog implements Serializable{
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnEliminar = new JButton("Ordenar Componentes");
+				btnEliminar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Tienda.getInstance().VerificarListaDeOrden();
+						loadOrdenes();
+					}
+				});
 				btnEliminar.setForeground(Color.BLACK);
 				btnEliminar.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 				buttonPane.add(btnEliminar);
@@ -79,12 +87,22 @@ public class OrdenesCompra extends JDialog implements Serializable{
 				buttonPane.add(cancelButton);
 			}
 		}
-		loadtable();
+		loadOrdenes();
 	}
 
 
-	private void loadtable() {
-		// TODO Auto-generated method stub
+	private void loadOrdenes() {
+		tablamodelo.setRowCount(0);
+		fila = new Object[tablamodelo.getColumnCount()];
+		for (int i = 0; i<Tienda .getInstance().LlenarListaDeOrdenes().size();i++) {
+			
+			fila[0] =  Tienda.getInstance().tipoDeComponente(Tienda.getInstance().LlenarListaDeOrdenes().get(i) );			
+			fila[1] =  Tienda.getInstance().LlenarListaDeOrdenes().get(i).getCodigo();
+			fila[2] =  Tienda.getInstance().LlenarListaDeOrdenes().get(i).getMarca();
+			fila[3] =  Tienda.getInstance().LlenarListaDeOrdenes().get(i).getCantidad();
+			
+			tablamodelo.addRow(fila);
+		}
 		
 	}
 	

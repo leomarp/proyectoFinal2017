@@ -8,10 +8,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,6 +36,7 @@ public class LogIn extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
+			UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
 			LogIn dialog = new LogIn();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

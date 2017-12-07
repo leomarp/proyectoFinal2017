@@ -20,6 +20,7 @@ public class Main {
 			e.printStackTrace();
 		}
 		LogIn l= new LogIn();
+		l.setLocationRelativeTo(null);
 		l.setVisible(true);
 
 	}
