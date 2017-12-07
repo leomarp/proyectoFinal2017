@@ -28,6 +28,22 @@ public class Tienda implements Serializable{
 	
 	}
 
+	public void setearNuevosCambiosInventarioLuegoDeFactura(ArrayList<Componente> c){
+		misComponentes= new ArrayList<Componente>();
+		for (int i = 0; i < c.size(); i++) {
+			Componente n = new Componente( );
+			n.setCantidad(c.get(i).getCantidad());
+			n.setCodigo (c.get(i).getCodigo());
+			n.setMarca(c.get(i).getMarca());
+			n.setModelo(c.get(i).getModelo() );
+			n.setNombre(c.get(i).getNombre());
+			n.setNumeroSerie(c.get(i).getNumeroSerie());
+			n.setPrecioCompra(c.get(i).getPrecioCompra());
+			n.setPrecioVenta(c.get(i).getPrecioVenta());
+			misComponentes.add(n);
+		}	
+		
+	}
 	
 	public ArrayList<Componente> getComboComponentes(int indice){
 		ArrayList<Componente> c= null;
@@ -302,25 +318,26 @@ public class Tienda implements Serializable{
 	}
 	
 	public ArrayList<Componente> eliminarCantidadArticulo(ArrayList<Componente> listaComponentes,String cod,int Cantidad){
-		ArrayList<Componente> listaDevuelta =listaComponentes;
+		
 		for (int i = 0; i <listaComponentes.size(); i++) {
 			if(listaComponentes.get(i).getCodigo().equalsIgnoreCase(cod)){
-				
+				System.out.println("Componente Diponible antes de kitar: "+listaComponentes.get(i).getCantidad());
 				listaComponentes.get(i).setCantidad(listaComponentes.get(i).getCantidad() - Cantidad );
+				System.out.println("Componente Diponible despues de kitar: "+listaComponentes.get(i).getCantidad());
 			}
 			
 		}
 		
-		return listaDevuelta;
+		return listaComponentes;
 	}
 	
 	public Componente BuscarCodigoComponente(ArrayList<Componente> listaComponentes,String cod) {
 		Componente com=null;
-		for (Componente aux : listaComponentes) {
-			if(aux.getCodigo().equalsIgnoreCase(cod)) {
-				com=aux;
+		
+		for (int i = 0; i < listaComponentes.size(); i++) {
+			if (listaComponentes.get(i).getCodigo().equalsIgnoreCase(cod)){
+				com=listaComponentes.get(i);
 			}
-			
 		}
 		
 		return com;
@@ -402,12 +419,12 @@ public class Tienda implements Serializable{
 		
 		for (int i = 0; i < lista.size(); i++) {
 			if(lista.get(i).getCodigo().equalsIgnoreCase(codigo)){
-				return false;
+				return true;
 			}
 			
 			
 		}
-		return true;
+		return false ;
 	}
 	
 	public int TarjetasVendidas() {

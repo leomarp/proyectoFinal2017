@@ -465,20 +465,20 @@ public class RegistrarProducto extends JDialog implements Serializable{
 				
 				txtCodigo.getText().equalsIgnoreCase("")
 		){
-			System.out.println("esto esta jodiendo 1");
+			
 			return false;
 		} 
 		if(Tienda.getInstance().existeComponente(codigo )){
-			System.out.println("esto esta jodiendo 2");
+			
 			return false;
 			
 		}
 		
 		if(pVenta <= pcompra ){
-			System.out.println("esto esta jodiendo 3");
+			
 			return false;
 		}
-		System.out.println("esto esta jodiendo 4");
+		
 		return true;
 	}
 	

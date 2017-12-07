@@ -55,17 +55,29 @@ public class CrearFactura extends JDialog implements Serializable{
 	private static MaskFormatter formato;
 	private static MaskFormatter telef;	
 	private ArrayList<Componente> carrito= new ArrayList<>();
-	private ArrayList<Componente> listaTemporal= Tienda.getInstance().getMisComponentes();
+	private ArrayList<Componente> listaTemporal= new ArrayList<>();
 	
+			
+	private ArrayList<Componente> listaTemporalMalo= Tienda.getInstance().getMisComponentes();
 	
 	private Cliente cliente=null;
 
 	public CrearFactura() {
 		setTitle("Crear factura");
-		
-		//creacion de un arreglo temporadl de componentes
-		
-		
+		// Para hacer un DEEP COPY del array de componentes.
+		for (int i = 0; i < Tienda.getInstance().getMisComponentes().size(); i++) {
+			Componente n = new Componente( );
+			n.setCantidad(Tienda.getInstance().getMisComponentes().get(i).getCantidad());
+			n.setCodigo (Tienda.getInstance().getMisComponentes().get(i).getCodigo());
+			n.setMarca(Tienda.getInstance().getMisComponentes().get(i).getMarca());
+			n.setModelo(Tienda.getInstance().getMisComponentes().get(i).getModelo() );
+			n.setNombre(Tienda.getInstance().getMisComponentes().get(i).getNombre());
+			n.setNumeroSerie(Tienda.getInstance().getMisComponentes().get(i).getNumeroSerie());
+			n.setPrecioCompra(Tienda.getInstance().getMisComponentes().get(i).getPrecioCompra());
+			n.setPrecioVenta(Tienda.getInstance().getMisComponentes().get(i).getPrecioVenta());
+			listaTemporal.add(n);
+		}	
+			
 		
 		setResizable(false);
 		setBounds(100, 100, 588, 687);
@@ -248,6 +260,7 @@ public class CrearFactura extends JDialog implements Serializable{
 				public void actionPerformed(ActionEvent e) {
 				//PARA PRESENTAR UNA VENTANA CON TODOS LOS COMPONENTES
 					cargarListComponentes();
+					
 					int dialogButton=0;
 					int dialogResult= JOptionPane.showConfirmDialog(null,new JScrollPane(table_comp),"Elegir Componente", dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION && table_comp.getSelectedRow()!=-1){
@@ -292,25 +305,39 @@ public class CrearFactura extends JDialog implements Serializable{
 			JButton btnAgregarAlCarrito = new JButton("Agregar al carrito");
 			btnAgregarAlCarrito.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(confirmarAgregadoACarrito()){
+					if(existeArticuloEnCarritoyActualizar()){
+						
 						String codigo= txtCodigo.getText();
-						int cantidad=(int) spnCantidad.getValue();
-						System.out.println("Cantidad: " +cantidad);
+						int cantidad2=(int) spnCantidad.getValue();
+						listaTemporal=Tienda.getInstance().eliminarCantidadArticulo(listaTemporal,codigo,cantidad2);
+					}else{
+					if(confirmarAgregadoACarrito()){
 						
-							Componente componenteSeleccionado=new Componente();
+						String codigo= txtCodigo.getText();
+						int cantidad2=(int) spnCantidad.getValue();
+						Componente n=new Componente();
+						n.setCantidad (cantidad2);
+						n.setCodigo (Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getCodigo());
+						n.setMarca(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getMarca());
+						n.setModelo(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getModelo() );
+						n.setNombre(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getNombre());
+						n.setNumeroSerie(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getNumeroSerie());
+						n.setPrecioCompra(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getPrecioCompra());
+						n.setPrecioVenta(Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getPrecioVenta());
+						
+						
+						
+						
+//						cantidadExistente=Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo).getCantidad();
+//						System.out.println("Cant exit: " +cantidadExistente);
+						listaTemporal=Tienda.getInstance().eliminarCantidadArticulo(listaTemporal,codigo,cantidad2);
+						carrito.add(n);
+						actualizarCarrito();
 							
-							componenteSeleccionado=Tienda.getInstance().BuscarCodigoComponente(listaTemporal,codigo);
-							componenteSeleccionado.setCantidad(cantidad);
-							System.out.println(componenteSeleccionado.getCantidad());
-							listaTemporal=Tienda.getInstance().eliminarCantidadArticulo(listaTemporal,codigo,cantidad);
-							System.out.println("ListaTemporal: "+listaTemporal);
-							carrito.add(componenteSeleccionado);
-							actualizarCarrito();
-							
 						
 						
 						
-					}
+					}}
 					
 					
 				}
@@ -416,7 +443,11 @@ public class CrearFactura extends JDialog implements Serializable{
 							factura.setMisComponentes(carrito);
 							factura.setFecha(date);
 							factura.setPrecioVenta(Float.parseFloat(txtTotal.getText()));
-							Tienda.getInstance().setMisComponentes(listaTemporal);
+							//para aplicar los cambios de inventario
+							
+							
+							Tienda.getInstance().setearNuevosCambiosInventarioLuegoDeFactura(listaTemporal);
+							
 							
 							Tienda.getInstance().AgregarFactura(factura);
 							JOptionPane.showMessageDialog(null, "Guardado con éxito");
@@ -485,6 +516,30 @@ public class CrearFactura extends JDialog implements Serializable{
 		
 	}
 	
+	private boolean existeArticuloEnCarritoyActualizar(){
+		
+		if(Tienda.getInstance().existeArticuloEnArreglo(carrito, txtCodigo.getText())){
+		
+			for (int i = 0; i < carrito.size(); i++) {
+				
+				if (carrito.get(i).getCodigo().equalsIgnoreCase(txtCodigo.getText())) {
+					
+					if(Tienda.getInstance().siExisteDisponibilidadSegunCantidadAComprar(listaTemporal,txtCodigo.getText(),(Integer)spnCantidad.getValue())){
+						carrito.get(i).setCantidad( carrito.get(i).getCantidad() + (Integer)spnCantidad.getValue());
+						actualizarCarrito();
+						
+						return true;
+						
+					}
+					
+					
+				}
+				
+			}
+			
+		}
+		return false;
+	}
 	
 	public boolean confirmarAgregadoACarrito(){
 		
@@ -499,32 +554,16 @@ public class CrearFactura extends JDialog implements Serializable{
 			}
 		}
 		
+		if(!Tienda.getInstance().siExisteDisponibilidadSegunCantidadAComprar(listaTemporal,txtCodigo.getText(),(Integer)spnCantidad.getValue())){
+			JOptionPane.showMessageDialog(null, "Digite una cantidad menor"); 
+			return false;
+		}
 		
 		if(spnCantidad.getValue().toString().equalsIgnoreCase("0")){
 			JOptionPane.showMessageDialog(null, "Digite una cantidad"); 
 			return false;
 		}
-		if(Tienda.getInstance().existeArticuloEnArreglo(carrito, txtCodigo.getText())){
-			
-			for (int i = 0; i < carrito.size(); i++) {
-				
-				if (carrito.get(i).getCodigo().equalsIgnoreCase(txtCodigo.getText())) {
-					if(Tienda.getInstance().siExisteDisponibilidadSegunCantidadAComprar(listaTemporal,txtCodigo.getText(),(Integer)spnCantidad.getValue())){
-						carrito.get(i).setCantidad( carrito.get(i).getCantidad() + (Integer)spnCantidad.getValue());
-						return true;
-						
-					}else{
-						JOptionPane.showMessageDialog(null, "Digite una cantidad menor"); 
-						return false;
-						
-					}
-					
-					
-				}
-				
-			}
-			
-		}
+		
 		
 
 		return true;
@@ -627,7 +666,7 @@ public class CrearFactura extends JDialog implements Serializable{
 		
 		model_comp.setRowCount(0);
 		fila=new Object[model_comp.getColumnCount()];
-		System.out.println(listaTemporal);
+		
 		for(int i=0; i<listaTemporal.size();i++){
 			fila[0]= listaTemporal.get(i).getCodigo();
 			fila[1]= listaTemporal.get(i).getMarca();
