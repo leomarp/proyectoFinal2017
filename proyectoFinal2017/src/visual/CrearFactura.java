@@ -277,7 +277,7 @@ public class CrearFactura extends JDialog implements Serializable{
 				
 			});
 			btnBuscarCodigo.setIcon(new ImageIcon(CrearFactura.class.getResource("/Fotos/if_Search_858732.png")));
-			btnBuscarCodigo.setBounds(300, 11, 46, 34);
+			btnBuscarCodigo.setBounds(300, 11, 46, 37);
 			panel_1.add(btnBuscarCodigo);
 			
 			JLabel lblCantidad = new JLabel("Precio:");
