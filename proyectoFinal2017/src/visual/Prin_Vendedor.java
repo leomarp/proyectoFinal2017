@@ -164,7 +164,7 @@ public class Prin_Vendedor extends JFrame implements Serializable{
 		
 		JLabel label = new JLabel("");
 		label.setBounds(10, 0, 1574, 790);
-		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));
+		label.setIcon(new ImageIcon(Prin_Vendedor.class.getResource("/Fotos/Pc.Solution.jpg")));
 		contentPane.add(label);
 	}
 }

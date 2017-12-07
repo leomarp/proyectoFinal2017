@@ -247,7 +247,7 @@ public class Principal extends JFrame implements Serializable {
 		
 		JLabel label = new JLabel("");
 		label.setBounds(0, 0, 1584, 800);
-		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/prin.jpg")));
+		label.setIcon(new ImageIcon(Principal.class.getResource("/Fotos/Pc.Solution.jpg")));
 		contentPane.add(label);
 		if(!Tienda.getInstance().abrirDatos()){
 			
