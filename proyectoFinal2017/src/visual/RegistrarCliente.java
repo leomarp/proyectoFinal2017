@@ -53,7 +53,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			panel.add(lblNombre);
 			
 			txtNombre = new JTextField();
-			txtNombre.setBounds(66, 37, 140, 20);
+			txtNombre.setBounds(66, 37, 140, 23);
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 			
@@ -72,7 +72,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			
 			
 			txtCedula = new  JFormattedTextField(cedu);;
-			txtCedula.setBounds(66, 81, 140, 20);
+			txtCedula.setBounds(66, 81, 140, 23);
 			panel.add(txtCedula);
 			txtCedula.setColumns(10);
 			
@@ -81,7 +81,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			panel.add(lblApellido);
 			
 			txtApellido = new JTextField();
-			txtApellido.setBounds(295, 37, 140, 20);
+			txtApellido.setBounds(295, 37, 140, 23);
 			panel.add(txtApellido);
 			txtApellido.setColumns(10);
 			
@@ -92,7 +92,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			panel.add(lblTelefono);
 			
 			txtTelefono = new JFormattedTextField(tele);
-			txtTelefono.setBounds(295, 81, 140, 20);
+			txtTelefono.setBounds(295, 81, 140, 23);
 			panel.add(txtTelefono);
 			txtTelefono.setColumns(10);
 			
@@ -101,7 +101,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			panel.add(lblDireccion);
 			
 			txtDireccion = new JTextField();
-			txtDireccion.setBounds(74, 129, 361, 20);
+			txtDireccion.setBounds(66, 129, 369, 23);
 			panel.add(txtDireccion);
 			txtDireccion.setColumns(10);
 			
@@ -110,7 +110,7 @@ public class RegistrarCliente extends JDialog implements Serializable{
 			panel.add(lblCorreo);
 			
 			txtCorreo = new JTextField();
-			txtCorreo.setBounds(66, 173, 369, 20);
+			txtCorreo.setBounds(66, 173, 369, 23);
 			panel.add(txtCorreo);
 			txtCorreo.setColumns(10);
 		}
