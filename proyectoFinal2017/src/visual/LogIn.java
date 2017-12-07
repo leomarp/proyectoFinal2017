@@ -109,7 +109,7 @@ public class LogIn extends JDialog {
 							dispose();
 							JOptionPane.showMessageDialog(null, "Bienvenido al Sistema","Entrada",JOptionPane.INFORMATION_MESSAGE);
 							Principal p= new Principal();
-						    p.setExtendedState(JFrame.MAXIMIZED_BOTH);
+						   
 							p.setVisible(true);
 							p.setLocationRelativeTo(null);
 							}else if (usuario.equals(vende) && pass.equals(admin)) {
