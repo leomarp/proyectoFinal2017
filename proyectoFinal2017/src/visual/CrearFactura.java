@@ -128,7 +128,12 @@ public class CrearFactura extends JDialog implements Serializable{
 					
 				}else{
 					JOptionPane.showMessageDialog(null, "Cliente no encontrado");
-					
+					txtNombre.setEditable(true);
+					txtApellido.setEditable(true);
+					txtTelefono.setEditable(true);
+					txtCorreo.setEditable(true);
+					txtDireccion.setEditable(true);
+
 				}
 				
 			
@@ -400,6 +405,8 @@ public class CrearFactura extends JDialog implements Serializable{
 					public void actionPerformed(ActionEvent e) {
 					//FACTURAR
 						if(confirmarFactura()){
+							cliente= cargarCliente1();
+						
 							int codigo= Tienda.getInstance().getMisFacturas().size()+1; 
 							Date date = new Date();
 							Factura factura = new Factura();
@@ -438,6 +445,20 @@ public class CrearFactura extends JDialog implements Serializable{
 		}
 	}
 	
+	public Cliente cargarCliente1(){
+		String nombre=txtNombre.getText();
+		String apellido=txtApellido.getText();
+		String correo=txtCorreo.getText();
+		String cedula=txtCedula.getText();
+		String direccion=txtDireccion.getText();
+		String telefono=txtTelefono.getText();
+		
+		Cliente cliente=new Cliente(nombre, apellido, cedula, direccion, telefono, correo);
+		Tienda.getInstance().AgregarCliente(cliente);
+		return cliente;
+		
+	}
+	
 	
 	private boolean confirmarFactura() {
 		if(txtNombre.getText().equalsIgnoreCase("")){
@@ -459,6 +480,7 @@ public class CrearFactura extends JDialog implements Serializable{
 		cleanCarrito();
 		cleanTotales();
 		spnDescuento.setValue(0);
+		txtCedula.requestFocus();
 		
 		
 	}
