@@ -28,7 +28,7 @@ public class Grafica extends JDialog implements Serializable{
 	private final JPanel contentPanel = new JPanel();
 	
 	public Grafica() {
-		setBounds(100, 100, 714, 458);
+		setBounds(100, 100, 714, 515);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
