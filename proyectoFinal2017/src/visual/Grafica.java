@@ -13,6 +13,9 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
+
+import logic.Tienda;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -34,10 +37,10 @@ public class Grafica extends JDialog implements Serializable{
 		//Aqui se le ponen los valores
 				// Fuente de Datos
 		        DefaultPieDataset data1 = new DefaultPieDataset();
-		        data1.setValue("Disco Duro", 50);
-		        data1.setValue("Tarjeta Madre", 30);
-		        data1.setValue("Ram", 25);
-		        data1.setValue("Micro", 15);
+		        data1.setValue("Disco Duro", Tienda.getInstance().DiscosVendidas());
+		        data1.setValue("Tarjeta Madre", Tienda.getInstance().TarjetasVendidas());
+		        data1.setValue("Ram", Tienda.getInstance().MemoriaRamVendidas());
+		        data1.setValue("Micro", Tienda.getInstance().ProcesadorVendidas());
 
 		        // 
 		        // Creando el Grafico

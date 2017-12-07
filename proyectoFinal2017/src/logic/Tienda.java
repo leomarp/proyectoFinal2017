@@ -410,10 +410,69 @@ public class Tienda implements Serializable{
 		return true;
 	}
 	
+	public int TarjetasVendidas() {
+		int cant=0;
+		
+		for(int i=0;i<misFacturas.size();i++) {
+			for(int j=0;j<misFacturas.get(i).getMisComponentes().size();j++) {
+				if(misFacturas.get(i).getMisComponentes().get(j) instanceof TarjetaMadre) {
+					
+					cant++;
+				}
+				
+			}
+		}
+		return cant;
+		
+	}
 	
+	public int DiscosVendidas() {
+		int cant=0;
+		
+		for(int i=0;i<misFacturas.size();i++) {
+			for(int j=0;j<misFacturas.get(i).getMisComponentes().size();j++) {
+				if(misFacturas.get(i).getMisComponentes().get(j) instanceof DiscoDuro) {
+					
+					cant++;
+				}
+				
+			}
+		}
+		return cant;
+		
+	}
 	
+	public int ProcesadorVendidas() {
+		int cant=0;
+		
+		for(int i=0;i<misFacturas.size();i++) {
+			for(int j=0;j<misFacturas.get(i).getMisComponentes().size();j++) {
+				if(misFacturas.get(i).getMisComponentes().get(j) instanceof Procesador) {
+					
+					cant++;
+				}
+				
+			}
+		}
+		return cant;
+		
+	}
 	
-	
+	public int MemoriaRamVendidas() {
+		int cant=0;
+		
+		for(int i=0;i<misFacturas.size();i++) {
+			for(int j=0;j<misFacturas.get(i).getMisComponentes().size();j++) {
+				if(misFacturas.get(i).getMisComponentes().get(j) instanceof MemoriaRam) {
+					
+					cant++;
+				}
+				
+			}
+		}
+		return cant;
+		
+	}
 	
 	
 }
