@@ -64,74 +64,108 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		contentPanel.setBorder(new TitledBorder(null, "Datos del Producto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		         
-		          panelMemoriaRam = new JPanel();
-		          panelMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		          panelMemoriaRam.setBounds(10, 224, 462, 143);
-		          contentPanel.add(panelMemoriaRam);
-		          panelMemoriaRam.setLayout(null);
-		          panelMemoriaRam.setVisible(false);
+		            
+		            panelTarjetaMadre = new JPanel();
+		            panelTarjetaMadre.setBorder(new TitledBorder(null, "Tarjeta Madre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		            panelTarjetaMadre.setBounds(10, 224, 462, 143);
+		            contentPanel.add(panelTarjetaMadre);
+		            panelTarjetaMadre.setLayout(null);
+		            panelTarjetaMadre.setVisible(true);
+		            
+		            JLabel lblTipoDeconector = new JLabel("Tipo de Conector:");
+		            lblTipoDeconector.setBounds(10, 31, 109, 14);
+		            panelTarjetaMadre.add(lblTipoDeconector);
+		            
+		             cbxTipoConexionTarjetaMadre = new JComboBox();
+		             cbxTipoConexionTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "AX", "AT", "ATX", "ITX", "BTX", "DTX"}));
+		             cbxTipoConexionTarjetaMadre.setBounds(111, 28, 99, 23);
+		             panelTarjetaMadre.add(cbxTipoConexionTarjetaMadre);
+		             
+		             JLabel lblTipoDeRam = new JLabel("Tipo de Ram:");
+		             lblTipoDeRam.setBounds(10, 71, 81, 14);
+		             panelTarjetaMadre.add(lblTipoDeRam);
+		             
+		              cbxTipoRamTarjetaMadre = new JComboBox();
+		              cbxTipoRamTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
+		              cbxTipoRamTarjetaMadre.setBounds(111, 68, 99, 23);
+		              panelTarjetaMadre.add(cbxTipoRamTarjetaMadre);
+		              
+		              JLabel lblTipoDeSoket = new JLabel("Tipo de Soket:");
+		              lblTipoDeSoket.setBounds(10, 107, 81, 14);
+		              panelTarjetaMadre.add(lblTipoDeSoket);
+		              
+		              cbxTipoSoketTarjetaMadre = new JComboBox();
+		              cbxTipoSoketTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "PGA", "BGA", "LGA"}));
+		              cbxTipoSoketTarjetaMadre.setBounds(111, 104, 99, 23);
+		              panelTarjetaMadre.add(cbxTipoSoketTarjetaMadre);
+		           
+		            panelMemoriaRam = new JPanel();
+		            panelMemoriaRam.setBorder(new TitledBorder(null, "Memoria Ram", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		            panelMemoriaRam.setBounds(10, 224, 462, 143);
+		            contentPanel.add(panelMemoriaRam);
+		            panelMemoriaRam.setLayout(null);
+		            panelMemoriaRam.setVisible(false);
+		            
+		            JLabel lblCantidad_1 = new JLabel("Capacidad:");
+		            lblCantidad_1.setBounds(10, 31, 67, 14);
+		            panelMemoriaRam.add(lblCantidad_1);
+		            
+		             cbxCapacidadRam = new JComboBox();
+		             cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "1GB", "2GB", "4GB", "8GB", "16GB"}));
+		             cbxCapacidadRam.setBounds(111, 28, 99, 23);
+		             panelMemoriaRam.add(cbxCapacidadRam);
+		             
+		             JLabel lblVelocidad_1 = new JLabel("Velocidad(MHZ):");
+		             lblVelocidad_1.setBounds(10, 71, 99, 14);
+		             panelMemoriaRam.add(lblVelocidad_1);
+		             
+		             cbxVelocidadRam = new JComboBox();
+		             cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
+		             cbxVelocidadRam.setBounds(111, 68, 99, 23);
+		             panelMemoriaRam.add(cbxVelocidadRam);
+		             
+		             JLabel lblTipo = new JLabel("Tipo:");
+		             lblTipo.setBounds(10, 107, 46, 14);
+		             panelMemoriaRam.add(lblTipo);
+		             
+		              cbxTipoRam = new JComboBox();
+		              cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
+		              cbxTipoRam.setBounds(111, 104, 99, 23);
+		              panelMemoriaRam.add(cbxTipoRam);
 		          
-		          JLabel lblCantidad_1 = new JLabel("Capacidad:");
-		          lblCantidad_1.setBounds(10, 31, 67, 14);
-		          panelMemoriaRam.add(lblCantidad_1);
-		          
-		           cbxCapacidadRam = new JComboBox();
-		           cbxCapacidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "1GB", "2GB", "4GB", "8GB", "16GB"}));
-		           cbxCapacidadRam.setBounds(111, 28, 99, 23);
-		           panelMemoriaRam.add(cbxCapacidadRam);
+		           panelDiscoDuro = new JPanel();
+		           panelDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		           panelDiscoDuro.setBounds(10, 224, 462, 143);
+		           contentPanel.add(panelDiscoDuro);
+		           panelDiscoDuro.setLayout(null);
+		           panelDiscoDuro.setVisible(false);
 		           
-		           JLabel lblVelocidad_1 = new JLabel("Velocidad(MHZ):");
-		           lblVelocidad_1.setBounds(10, 71, 99, 14);
-		           panelMemoriaRam.add(lblVelocidad_1);
+		           JLabel lblCapacidad = new JLabel("Capacidad:");
+		           lblCapacidad.setBounds(10, 31, 69, 14);
+		           panelDiscoDuro.add(lblCapacidad);
 		           
-		           cbxVelocidadRam = new JComboBox();
-		           cbxVelocidadRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "400MHZ", "1066MHZ", "2400MHZ", "3000MHZ"}));
-		           cbxVelocidadRam.setBounds(111, 68, 99, 23);
-		           panelMemoriaRam.add(cbxVelocidadRam);
-		           
-		           JLabel lblTipo = new JLabel("Tipo:");
-		           lblTipo.setBounds(10, 107, 46, 14);
-		           panelMemoriaRam.add(lblTipo);
-		           
-		            cbxTipoRam = new JComboBox();
-		            cbxTipoRam.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
-		            cbxTipoRam.setBounds(111, 104, 99, 23);
-		            panelMemoriaRam.add(cbxTipoRam);
-		        
-		         panelDiscoDuro = new JPanel();
-		         panelDiscoDuro.setBorder(new TitledBorder(null, "Disco Duro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		         panelDiscoDuro.setBounds(10, 224, 462, 143);
-		         contentPanel.add(panelDiscoDuro);
-		         panelDiscoDuro.setLayout(null);
-		         panelDiscoDuro.setVisible(false);
-		         
-		         JLabel lblCapacidad = new JLabel("Capacidad:");
-		         lblCapacidad.setBounds(10, 31, 69, 14);
-		         panelDiscoDuro.add(lblCapacidad);
-		         
-		          cbxCapacidadDiscoDuro = new JComboBox();
-		          cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
-		          cbxCapacidadDiscoDuro.setBounds(111, 28, 99, 23);
-		          panelDiscoDuro.add(cbxCapacidadDiscoDuro);
-		          
-		          JLabel lblTipoDeConexion = new JLabel("Tipo de Conexion:");
-		          lblTipoDeConexion.setBounds(10, 71, 109, 14);
-		          panelDiscoDuro.add(lblTipoDeConexion);
-		          
-		           cbxTipoConexionDiscoDuro = new JComboBox();
-		           cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "IDE", "SATA", "SCSI", "SAS"}));
-		           cbxTipoConexionDiscoDuro.setBounds(111, 68, 99, 23);
-		           panelDiscoDuro.add(cbxTipoConexionDiscoDuro);
-		           
-		           JLabel lblVelocidadrpm = new JLabel("Velocidad(RPM):");
-		           lblVelocidadrpm.setBounds(10, 107, 97, 14);
-		           panelDiscoDuro.add(lblVelocidadrpm);
-		           
-		            cbxVelocidadDiscoDuro = new JComboBox();
-		            cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "5,400 (RPM) ", "7,200 (RPM)"}));
-		            cbxVelocidadDiscoDuro.setBounds(111, 104, 99, 23);
-		            panelDiscoDuro.add(cbxVelocidadDiscoDuro);
+		            cbxCapacidadDiscoDuro = new JComboBox();
+		            cbxCapacidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "80GB", "120GB", "250GB", "500GB", "600GB", "1TB", "2TB"}));
+		            cbxCapacidadDiscoDuro.setBounds(111, 28, 99, 23);
+		            panelDiscoDuro.add(cbxCapacidadDiscoDuro);
+		            
+		            JLabel lblTipoDeConexion = new JLabel("Tipo de Conexion:");
+		            lblTipoDeConexion.setBounds(10, 71, 109, 14);
+		            panelDiscoDuro.add(lblTipoDeConexion);
+		            
+		             cbxTipoConexionDiscoDuro = new JComboBox();
+		             cbxTipoConexionDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "IDE", "SATA", "SCSI", "SAS"}));
+		             cbxTipoConexionDiscoDuro.setBounds(111, 68, 99, 23);
+		             panelDiscoDuro.add(cbxTipoConexionDiscoDuro);
+		             
+		             JLabel lblVelocidadrpm = new JLabel("Velocidad(RPM):");
+		             lblVelocidadrpm.setBounds(10, 107, 97, 14);
+		             panelDiscoDuro.add(lblVelocidadrpm);
+		             
+		              cbxVelocidadDiscoDuro = new JComboBox();
+		              cbxVelocidadDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "5,400 (RPM) ", "7,200 (RPM)"}));
+		              cbxVelocidadDiscoDuro.setBounds(111, 104, 99, 23);
+		              panelDiscoDuro.add(cbxVelocidadDiscoDuro);
 		       
 		        panelMicroprocesador = new JPanel();
 		        panelMicroprocesador.setBorder(new TitledBorder(null, "Microprocesador", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -157,40 +191,6 @@ public class RegistrarProducto extends JDialog implements Serializable{
 		          cbxVelocidadMicroProcesador.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "1.8GHZ", "2.4GHZ", "3.0GHZ"}));
 		          cbxVelocidadMicroProcesador.setBounds(111, 68, 99, 23);
 		          panelMicroprocesador.add(cbxVelocidadMicroProcesador);
-		       
-		       panelTarjetaMadre = new JPanel();
-		       panelTarjetaMadre.setBorder(new TitledBorder(null, "Tarjeta Madre", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		       panelTarjetaMadre.setBounds(10, 224, 462, 143);
-		       contentPanel.add(panelTarjetaMadre);
-		       panelTarjetaMadre.setLayout(null);
-		       panelTarjetaMadre.setVisible(true);
-		       
-		       JLabel lblTipoDeconector = new JLabel("Tipo de Conector:");
-		       lblTipoDeconector.setBounds(10, 31, 109, 14);
-		       panelTarjetaMadre.add(lblTipoDeconector);
-		       
-		        cbxTipoConexionTarjetaMadre = new JComboBox();
-		        cbxTipoConexionTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "AX", "AT", "ATX", "ITX", "BTX", "DTX"}));
-		        cbxTipoConexionTarjetaMadre.setBounds(111, 28, 103, 23);
-		        panelTarjetaMadre.add(cbxTipoConexionTarjetaMadre);
-		        
-		        JLabel lblTipoDeRam = new JLabel("Tipo de Ram:");
-		        lblTipoDeRam.setBounds(10, 71, 81, 14);
-		        panelTarjetaMadre.add(lblTipoDeRam);
-		        
-		         cbxTipoRamTarjetaMadre = new JComboBox();
-		         cbxTipoRamTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "DDR", "DDR2", "DDR3"}));
-		         cbxTipoRamTarjetaMadre.setBounds(111, 68, 103, 23);
-		         panelTarjetaMadre.add(cbxTipoRamTarjetaMadre);
-		         
-		         JLabel lblTipoDeSoket = new JLabel("Tipo de Soket:");
-		         lblTipoDeSoket.setBounds(10, 107, 81, 14);
-		         panelTarjetaMadre.add(lblTipoDeSoket);
-		         
-		         cbxTipoSoketTarjetaMadre = new JComboBox();
-		         cbxTipoSoketTarjetaMadre.setModel(new DefaultComboBoxModel(new String[] {"<Selecione>", "PGA", "BGA", "LGA"}));
-		         cbxTipoSoketTarjetaMadre.setBounds(111, 104, 103, 23);
-		         panelTarjetaMadre.add(cbxTipoSoketTarjetaMadre);
 		
 		JLabel lblMarca = new JLabel("Marca:");
 		lblMarca.setBounds(11, 132, 46, 14);
