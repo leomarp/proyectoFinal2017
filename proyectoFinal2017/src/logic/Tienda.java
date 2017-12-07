@@ -183,7 +183,6 @@ public class Tienda implements Serializable{
 	}	
 	public void AgregarFactura(Factura factura) {
 		misFacturas.add(factura);
-		actualizarInventario(factura.getMisComponentes());
 		
 		guardar();
 	}	
