@@ -152,7 +152,23 @@ public class Combos extends JDialog implements Serializable{
 				Combo co=new Combo();
 				
 				co.setNombre(txtNombreCombo.getText() );
-				co.setMiCombo(miscombos);
+				
+				
+				
+				for (int i = 0; i < miscombos.size(); i++) {
+					Componente n = new Componente();
+					n.setCantidad(miscombos.get(i).getCantidad());
+					
+					n.setCodigo (miscombos.get(i).getCodigo());
+					n.setMarca(miscombos.get(i).getMarca());
+					n.setModelo(miscombos.get(i).getModelo() );
+					n.setNombre(miscombos.get(i).getNombre());
+					n.setNumeroSerie(miscombos.get(i).getNumeroSerie());
+					n.setPrecioCompra(miscombos.get(i).getPrecioCompra());
+					n.setPrecioVenta(miscombos.get(i).getPrecioVenta());
+					
+					co.getMiCombo().add(n);
+				}
 				
 				Tienda.getInstance().AgregarCombo(co);
 				miscombos.clear();
