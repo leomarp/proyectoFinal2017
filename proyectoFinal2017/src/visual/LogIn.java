@@ -38,6 +38,7 @@ public class LogIn extends JDialog {
 		try {
 			UIManager.setLookAndFeel(new SyntheticaPlainLookAndFeel());
 			LogIn dialog = new LogIn();
+			dialog.setLocationRelativeTo(null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
